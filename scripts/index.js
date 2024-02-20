@@ -68,13 +68,6 @@ const createScene = function(){
     // Creates a basic Babylon Scene object
     const scene = new BABYLON.Scene(engine);
 
-    
-    // // Create Camera
-    // const camera = new BABYLON.TargetCamera("Camera", new BABYLON.Vector3(0, 5, 5), scene);
-    // camera.attachControl(canvas, true);
-    // camera.fov = 1;
-    // camera.mode = BABYLON.Camera.ORTHOGRAPHIC_CAMERA;
-
     // Create Camera
     const camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.75, 10, new BABYLON.Vector3(0, 0, 0), scene);
     camera.attachControl(canvas, true);
@@ -82,32 +75,12 @@ const createScene = function(){
 
     camera.allowUpsideDown = false;
     camera.panningSensibility = 0;
-    camera.angularSensibilityX = 2048;
-    camera.angularSensibilityY = 2048;
+    camera.angularSensibilityX = 512;
+    camera.angularSensibilityY = 512;
     camera.lowerRadiusLimit = 10;
     camera.upperRadiusLimit = 10;
     camera.lowerBetaLimit = 0.75;
     camera.upperBetaLimit = 0.75;
-
-    // let aspectratio = (engine.getRenderHeight() /engine.getRenderWidth());
-
-    // if (aspectratio <= 1) {
-    //     camera.orthoLeft = -1/aspectratio;
-    //     camera.orthoRight = 1/aspectratio;
-    //     camera.orthoTop =  1;
-    //     camera.orthoBottom = -1;
-    // }
-    // else {
-    //     camera.orthoLeft = -1;
-    //     camera.orthoRight = 1;
-    //     camera.orthoTop =  aspectratio;
-    //     camera.orthoBottom = -aspectratio;
-    // }
-
-    // camera.orthoLeft = -1;
-    // camera.orthoRight = 1;
-    // camera.orthoTop =  (engine.getRenderHeight() /engine.getRenderWidth());
-    // camera.orthoBottom = -(engine.getRenderHeight() /engine.getRenderWidth());
 
     console.log(engine.getRenderHeight() /engine.getRenderWidth());
     var target = new BABYLON.Vector3(0,0,0);
@@ -126,14 +99,13 @@ const createScene = function(){
     sun.intensity = 2;
     sun.shadowEnabled = true;
     sun.autoCalcShadowZBounds = true;
-
     
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
 
     
     // Shadows
-    const sg = new BABYLON.ShadowGenerator(512, sun);
+    const sg = new BABYLON.ShadowGenerator(2048, sun);
     sg.bias = 0.0005;
     sg.darkness = 0;
     sg.useBlurCloseExponentialShadowMap = true;
@@ -150,27 +122,6 @@ const createScene = function(){
     defmat.roughness = 1;
     defmat.metallic = 0;
     defmat.metallicF0Factor = 0;
-    // defmat.iridescence.isEnabled = true;
-    // defmat.iridescence.indexOfRefraction = 1.8;
-    
-
-    // let framing_ref = BABYLON.SceneLoader.ImportMesh("","assets/", "framing_ref.glb", scene, function (newMeshes) {
-    //     newMeshes.forEach(mesh => {
-    //         mesh.material = defmat;
-    //         mesh.receiveShadows = true;
-    //         sg.addShadowCaster(mesh, true);
-    //     });
-    // });
-
-    // let tile = BABYLON.SceneLoader.ImportMesh("","assets/", "t_debug.glb", scene, function (newMeshes) {
-    //     newMeshes.forEach(mesh => {
-    //         mesh.position.y = 0.25;
-    //         mesh.scalingDeterminant = 0.25;
-    //         mesh.material = defmat;
-    //         mesh.receiveShadows = true;
-    //         sg.addShadowCaster(mesh, true);
-    //     });
-    // });
 
     // Load Asset Function
 
@@ -257,7 +208,7 @@ const createScene = function(){
         });
     }
 
-    loadMesh("framing_01");
+    loadMesh("framing_ref");
     // loadMesh("framing_02");
     // loadMesh("framing_03");
 
