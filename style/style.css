@@ -1,0 +1,192 @@
+/* FONTS */
+
+@font-face {
+    font-family: 'os-regular';
+    src: url('../fonts/os-regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'os-light';
+    src: url('subset-OpenSans-Light.woff2') format('woff2');
+    font-weight: lighter;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'os-bold';
+    src: url('/fonts/os-bold.woff2') format('woff2');
+    font-weight: bolder;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'anton';
+    src: url('../fonts/anton.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'bobby';
+    src: url('../fonts/bobby.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* COLORS */
+
+:root{
+    --pink: #E0A2FF;
+    --blue: #3900A7;
+    --yellow: #FCE815;
+
+    --pinktp: rgba(224, 162, 255, 0.8);
+}
+
+/* RESET */
+
+html, body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--blue);
+    font-family: os-regular, Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+    color: var(--pink);
+}
+
+div {
+    z-index: 99;
+}
+
+img {
+    object-fit: contain;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+div {
+    padding: 0;
+    margin: 0;
+}
+
+/* BABYLON RENDER CANVAS */
+
+#renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    z-index: -1;
+}
+
+/* DIALOG FRAME */
+
+#dialogFrame {
+    position: absolute;
+    margin-left: auto;
+    height: 100%;
+    max-height: 22vh;
+    width: 100%;
+    visibility: hidden;
+}
+
+#dialogWrap{
+    margin: 2vh auto;
+    background-color: var(--pinktp);
+    width: 95%;
+    max-width: 1280px;
+    height: 20vh;
+    display: flex;
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--yellow);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+#dialogPortrait {
+    height: 100%;
+    min-width: 20vh;
+    flex: 1;
+    /* background-image: url(img/kiez_logo.jpg); */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 10px;
+}
+
+#dialogText {
+    padding: 2vh;
+    flex: 4;
+    width: auto;
+    font-size: 4vmin;
+}
+
+/* LOGO */
+
+#logoContainer {
+    position: absolute;
+    top: 0;
+    z-index: 99;
+    width: calc(100vw - 4em);
+    margin: 2em;
+    height: 10vh;
+    box-sizing: content-box;
+    background-image: url(../img/logo-kiez.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* POWERED BY */
+
+#poweredContainer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    font-family: bobby, Arial, Helvetica, sans-serif;
+    font-size: 1.25em;
+}
+
+#poweredLogos {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    gap: 0em;
+    justify-items: center;
+    justify-content: center;
+    max-width: 240px;
+    margin: 0 auto 0 auto;
+}
+
+.poweredLogo {
+    width: calc(50vw - 2em);
+    height: 7vh;
+    margin: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+#logoScum {
+    background-image: url(../img/logo-scum.svg);
+}
+
+#logoGva {
+    background-image: url(../img/logo-gva.svg);
+}
