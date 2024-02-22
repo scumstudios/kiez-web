@@ -1,6 +1,3 @@
-// HTML UI FUNCTIONS
-// screen.orientation.lock('portrait');
-
 // Dialog Interaction Function
 function dialog_pop(text) {
     if (document.getElementById("dialogFrame").style.visibility == "visible") {
@@ -77,8 +74,9 @@ const createScene = function(){
     camera.panningSensibility = 0;
     camera.angularSensibilityX = 512;
     camera.angularSensibilityY = 512;
-    camera.lowerRadiusLimit = 10;
-    camera.upperRadiusLimit = 10;
+    camera.wheelPrecision = 50;
+    camera.lowerRadiusLimit = 7.5;
+    camera.upperRadiusLimit = 12.5;
     camera.lowerBetaLimit = 0.75;
     camera.upperBetaLimit = 0.75;
 
@@ -89,39 +87,21 @@ const createScene = function(){
 
     // Lighting Setup
     const sky = new BABYLON.HemisphericLight("Sky", new BABYLON.Vector3(-0.5, 1, 0), scene);
-    const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(0, -1, 0), scene);
-    
-    sky.intensity = 0.75;
-
-    sun.position = new BABYLON.Vector3(0, 10, 0);
-    sun.direction = new BABYLON.Vector3(1, -1, 1);
-    sun.diffuse = new BABYLON.Color3(1, 0.98, 0.7);
-    sun.intensity = 2;
-    sun.shadowEnabled = true;
-    sun.autoCalcShadowZBounds = true;
+    sky.intensity = 1;
     
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
-
-    
-    // Shadows
-    const sg = new BABYLON.ShadowGenerator(2048, sun);
-    sg.bias = 0.0005;
-    sg.darkness = 0;
-    sg.useBlurCloseExponentialShadowMap = true;
-    sg.useContactHardeningShadow = false;
-    sg.useKernelBlur = true;
-    sg.blurKernel = 8;
-
     
     // Define Default Material
     const defmat = new BABYLON.PBRMaterial("defmat", scene);
     defmat.reflectivityColor = new BABYLON.Color3(0, 0, 0);
     defmat.transparencyMode = 0;
-    defmat.indexOfRefraction = 1.0;
+    defmat.indexOfRefraction = 1.5;
     defmat.roughness = 1;
     defmat.metallic = 0;
     defmat.metallicF0Factor = 0;
+    //defmat.albedoTexture = new BABYLON.Texture("../asstes/00-start.jpg")
+
 
     // Load Asset Function
 
@@ -166,51 +146,20 @@ const createScene = function(){
     // }
 
     function loadMesh(meshName, meshPosition, dialogText){
-        BABYLON.SceneLoader.ImportMeshAsync("","../assets/", (meshName + ".glb")).then((result) => {
+        var meshName = BABYLON.SceneLoader.ImportMeshAsync("","../assets/", (meshName + ".glb")).then((result) => {
             result.meshes.forEach(mesh => {
-                // Define 
-                mesh.material = defmat;
-                mesh.receiveShadows = true;
-                sg.addShadowCaster(mesh, true);
+                // Set outline
+                mesh.renderOutline = true;
+                mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                mesh.outlineWidth = 0.005;
                 for (i = 0; i < scene.animationGroups.length; i++) {
                     scene.animationGroups[i].play(true);
-                }
-    
-                // Set position
-                //if(mesh.id != "__root__"){} else {mesh.position = meshPosition;}
-    
-                // Glow, Dialog Pop & Movement
-                // hl.addMesh(mesh, BABYLON.Color3.Yellow());
-    
-                // mesh.actionManager = new BABYLON.ActionManager(scene);
-                // mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                //     cam_move(tilePosition);
-                //     dialog_pop(dialogText);
-                //     mesh.material = defmat;
-                //     // hl.removeMesh(mesh);
-
-                //     // Set outline
-                //     mesh.renderOutline = true;
-                //     mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-                //     mesh.outlineWidth = 0.025;
-                // }));
-
-                // TODO: Highlight
-                // mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickOutTrigger, function () {
-                //     dialog_pop(dialogText);
-                //     hl.removeMesh(mesh);
-    
-                //     cam_move(tilePosition);
-                // }));
-                
-                
+                }            
             });
         });
     }
 
-    loadMesh("framing_ref");
-    // loadMesh("framing_02");
-    // loadMesh("framing_03");
+    loadMesh("00-start");
 
     // Hightlight Layer
     // const hl = new BABYLON.HighlightLayer("hl1", scene);
@@ -255,7 +204,7 @@ const createScene = function(){
     // scene.debugLayer.show();
 
     // Rendering Optimizations
-    engine.setHardwareScalingLevel(1);
+    engine.setHardwareScalingLevel(0.75);
 
     var options = new BABYLON.SceneOptimizerOptions();
     // options.addOptimization(new BABYLON.HardwareScalingOptimization(0, 2));
