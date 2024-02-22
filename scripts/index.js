@@ -146,7 +146,7 @@ const createScene = function(){
     // }
 
     function loadMesh(meshName, meshPosition, dialogText){
-        var meshName = BABYLON.SceneLoader.ImportMeshAsync("","../assets/", (meshName + ".glb")).then((result) => {
+        var meshName = BABYLON.SceneLoader.ImportMeshAsync("","https://scumstudios.github.io/kiez-web/assets/", (meshName + ".glb")).then((result) => { //TODO Fix Relative Link
             result.meshes.forEach(mesh => {
                 // Set outline
                 mesh.renderOutline = true;
