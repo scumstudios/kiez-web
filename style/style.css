@@ -165,22 +165,20 @@ div {
 
 #poweredLogos {
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 100%;
-    gap: 0em;
+    width: 100%;
+    grid-template-columns: auto auto;
     justify-items: center;
     justify-content: center;
-    max-width: 240px;
     margin: 0 auto 0 auto;
 }
 
 .poweredLogo {
-    width: calc(50vw - 2em);
-    height: 7vh;
-    margin: 1em;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+    height: 7vh;
+    width: 7vh;
+    margin: 1em;
 }
 
 #logoScum {
