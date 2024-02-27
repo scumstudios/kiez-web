@@ -1,2 +1,2 @@
 site.url: "https://scumstudios.github.io"
-site.baseurl: "kiez-web"
+site.baseurl: "/kiez-web"
