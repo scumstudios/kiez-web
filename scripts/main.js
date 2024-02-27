@@ -141,7 +141,7 @@ const createScene = function(){
         
         killScene();
         
-        BABYLON.SceneLoader.ImportMeshAsync("","/assets/", ("000-start.glb")).then((result) => { //TODO Fix Relative Link
+        BABYLON.SceneLoader.ImportMeshAsync("","../assets/", ("000-start.glb")).then((result) => { //TODO Fix Relative Link
             result.meshes.forEach(mesh => {
                 // Set outline
                 if (mesh.name != "zFloor"){
@@ -169,7 +169,7 @@ const createScene = function(){
         document.getElementById("poweredContainer").style.visibility = 'hidden';
 
         killScene();
-        BABYLON.SceneLoader.ImportMeshAsync("","/assets/", ("100-test.glb")).then((result) => { //TODO Fix Relative Link
+        BABYLON.SceneLoader.ImportMeshAsync("","../assets/", ("100-test.glb")).then((result) => { //TODO Fix Relative Link
             result.meshes.forEach(mesh => {
                 // Set outline
                 if (mesh.name != "zFloor"){
