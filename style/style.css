@@ -46,6 +46,7 @@
     --pink: #E0A2FF;
     --blue: #3900A7;
     --yellow: #FCE815;
+    --black: #111111;
 
     --pinktp: rgba(224, 162, 255, 0.8);
 }
@@ -61,7 +62,7 @@ html, body {
     background-color: var(--blue);
     font-family: os-regular, Arial, Helvetica, sans-serif;
     box-sizing: border-box;
-    color: var(--pink);
+    color: var(--black);
 }
 
 div {
@@ -97,10 +98,13 @@ div {
 
 #dialogFrame {
     position: absolute;
-    margin-left: auto;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
     height: 100%;
     max-height: 22vh;
     width: 100%;
+    max-width: 640px;
     visibility: hidden;
 }
 
@@ -134,7 +138,9 @@ div {
     padding: 2vh;
     flex: 4;
     width: auto;
+    font-family: bobby, Arial, Helvetica, sans-serif;
     font-size: 4vmin;
+    color: var(--black);
 }
 
 /* LOGO */
@@ -161,6 +167,7 @@ div {
     width: 100%;
     font-family: bobby, Arial, Helvetica, sans-serif;
     font-size: 1.25em;
+    color: var(--pink);
 }
 
 #poweredLogos {

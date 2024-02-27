@@ -44,6 +44,7 @@ const engine = new BABYLON.Engine(canvas, true, { stencil: true });
 //         text-align: center;
 //         color: #fff;
 //         background: #000;
+//         z-index: 99;
 //     }
 //     `;
 //     document.getElementsByTagName('head')[0].appendChild(customLoadingScreenCss);
@@ -100,70 +101,104 @@ const createScene = function(){
     defmat.roughness = 1;
     defmat.metallic = 0;
     defmat.metallicF0Factor = 0;
-    //defmat.albedoTexture = new BABYLON.Texture("../asstes/00-start.jpg")
+    
+    // Hightlight Layer
+    const hl = new BABYLON.HighlightLayer("hl1", scene);
+    // hl.innerGlow = false;
+    hl.blurHorizontalSize = 0.5;
+    hl.blurVerticalSize = 0.5;
 
 
-    // Load Asset Function
+    // Reset Scene
+    function killScene(){
+        while(scene.meshes.length) {
+            const mesh = scene.meshes[0]
+            mesh.dispose();
+            }
+        camera.alpha = 1.57;
+        camera.beta = 0.75;
+        camera.radius = 10;
+    }
 
-    // function loadMesh(meshName, meshPosition, dialogText){
-    //     BABYLON.SceneLoader.ImportMeshAsync("","../assets/", (meshName + ".glb")).then((result) => {
+    // function loadScene(sceneName){
+    //     var sceneName = BABYLON.SceneLoader.ImportMeshAsync("","/assets/", (sceneName + ".glb")).then((result) => { //TODO Fix Relative Link
     //         result.meshes.forEach(mesh => {
-    //             // Define 
-    //             mesh.material = defmat;
-    //             mesh.receiveShadows = true;
-    //             sg.addShadowCaster(mesh, true);
-    
-    //             // Set position
-    //             //if(mesh.id != "__root__"){} else {mesh.position = meshPosition;}
-    
-    //             // Glow, Dialog Pop & Movement
-    //             // hl.addMesh(mesh, BABYLON.Color3.Yellow());
-    
-    //             // mesh.actionManager = new BABYLON.ActionManager(scene);
-    //             // mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-    //             //     cam_move(tilePosition);
-    //             //     dialog_pop(dialogText);
-    //             //     mesh.material = defmat;
-    //             //     // hl.removeMesh(mesh);
-
-    //             //     // Set outline
-    //             //     mesh.renderOutline = true;
-    //             //     mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-    //             //     mesh.outlineWidth = 0.025;
-    //             // }));
-
-    //             // TODO: Highlight
-    //             // mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickOutTrigger, function () {
-    //             //     dialog_pop(dialogText);
-    //             //     hl.removeMesh(mesh);
-    
-    //             //     cam_move(tilePosition);
-    //             // }));
-                
-                
+    //             // Set outline
+    //             mesh.renderOutline = true;
+    //             mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+    //             mesh.outlineWidth = 0.005;
+    //             for (i = 0; i < scene.animationGroups.length; i++) {
+    //                 scene.animationGroups[i].play(true);
+    //             }            
     //         });
     //     });
     // }
 
-    function loadMesh(meshName, meshPosition, dialogText){
-        var meshName = BABYLON.SceneLoader.ImportMeshAsync("","https://scumstudios.github.io/kiez-web/assets/", (meshName + ".glb")).then((result) => { //TODO Fix Relative Link
+    function loadStart(){
+        document.getElementById("dialogFrame").style.visibility = 'hidden'; // TEMP FOR DEV
+        document.getElementById("logoContainer").style.visibility = 'visible';
+        document.getElementById("poweredContainer").style.visibility = 'visible';
+        
+        killScene();
+        
+        BABYLON.SceneLoader.ImportMeshAsync("","/assets/", ("000-start.glb")).then((result) => { //TODO Fix Relative Link
             result.meshes.forEach(mesh => {
                 // Set outline
-                mesh.renderOutline = true;
-                mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-                mesh.outlineWidth = 0.005;
+                if (mesh.name != "zFloor"){
+                    mesh.renderOutline = true;
+                    mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                    mesh.outlineWidth = 0.005;
+                }
                 for (i = 0; i < scene.animationGroups.length; i++) {
                     scene.animationGroups[i].play(true);
                 }            
             });
+        
+            // SCENE TRIGGERS
+            let mesh = scene.getMeshById("EVT.Booths");
+            hl.addMesh(mesh, BABYLON.Color3.Yellow());
+            mesh.actionManager = new BABYLON.ActionManager(scene);
+            mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+                load10();
+            }))
         });
     }
 
-    loadMesh("00-start");
+    function load10(){
+        document.getElementById("logoContainer").style.visibility = 'hidden';
+        document.getElementById("poweredContainer").style.visibility = 'hidden';
 
-    // Hightlight Layer
-    // const hl = new BABYLON.HighlightLayer("hl1", scene);
+        killScene();
+        BABYLON.SceneLoader.ImportMeshAsync("","/assets/", ("100-test.glb")).then((result) => { //TODO Fix Relative Link
+            result.meshes.forEach(mesh => {
+                // Set outline
+                if (mesh.name != "zFloor"){
+                    mesh.renderOutline = true;
+                    mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                    mesh.outlineWidth = 0.005;
+                }
+                for (i = 0; i < scene.animationGroups.length; i++) {
+                    scene.animationGroups[i].play(true);
+                }            
+            });
 
+            // SCENE TRIGGERS
+            let mesh = scene.getMeshById("EVT.Back");
+            hl.addMesh(mesh, BABYLON.Color3.Yellow())
+            mesh.actionManager = new BABYLON.ActionManager(scene);
+            mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+                    loadStart();
+            }))
+        });
+        dialog_pop("REF: Scene 100");
+    }
+
+   
+    loadStart();
+
+    
+
+    
 
     // // Camera Movement
     // var camMover = new BABYLON.TransformNode("camMover", scene);
