@@ -9,7 +9,6 @@
         <meta content="noindex,nofollow" name="robots" />
 
         <!-- Favicons -->
-
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -23,54 +22,48 @@
         <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
         <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
         <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
-        
-
-        <script type="text/javascript">
-            // Start Screen Hiding Function
-            function hide_start() {
-                document.getElementById("startContainer").style.visibility = 'hidden'
-            }
-         </script>
 
          <!-- Title -->
          <title>KIEZ.nu - Gen Z Kiest</title>
     </head>
 
    <body>
-    <!-- Start Screen -->
+    
+        <!-- Loading Element -->
+        <div id="loadAnim"></div>
 
-    <div id="logoContainer">
-        <div id="logoFrame"></div>
-        <div style="width: 100%; position: absolute; top: calc(10vh + 1em );">
-            <p style="text-align: center; font-family: bobby, Arial, Helvetica, sans-serif; font-size: 1.5em; color: white;">Gen Z Kiest </p>
-        </div>
-    </div>
-
-    <div id="poweredContainer">
-        <div>
-            <p style="text-align: center;">POWERED BY</p>
-        </div>        
-        <div id="poweredLogos">
-            <a href="https://www.scumstudios.be" target="_blank"><div class="poweredLogo" id="logoScum"></div></a>
-            <a href="https://www.gva.be" target="_blank"><div class="poweredLogo" id="logoGva"></div></a>
-        </div>
-
-        
-    </div>
-
-    <!-- Dialog Frame -->
-
-    <div id="dialogFrame">
-        <div id="dialogWrap">
-            <!-- <div id="dialogPortrait"></div> -->
-            <div id="dialogText">
-                Lorem Ipsum
+        <!-- Start Screen -->
+        <div id="logoContainer">
+            <div id="logoFrame"></div>
+            <div style="width: 100%; position: absolute; top: calc(10vh + 1em );">
+                <p style="text-align: center; font-family: bobby, Arial, Helvetica, sans-serif; font-size: 1.5em; color: white;">Gen Z Kiest </p>
             </div>
         </div>
-    </div>
 
-	<canvas id="renderCanvas"></canvas>
+        <div id="poweredContainer">
+            <div>
+                <p style="text-align: center;">POWERED BY</p>
+            </div>        
+            <div id="poweredLogos">
+                <a href="https://www.scumstudios.be" target="_blank"><div class="poweredLogo" id="logoScum"></div></a>
+                <a href="https://www.gva.be" target="_blank"><div class="poweredLogo" id="logoGva"></div></a>
+            </div>  
+        </div>
 
-    <!-- Main render script -->
-    <script src="scripts/main.js"></script>
+        <!-- Dialog Frame -->
+        <div id="dialogFrame">
+            <div id="dialogWrap">
+                <!-- <div id="dialogPortrait"></div> -->
+                <div id="dialogText">
+                    Lorem Ipsum
+                </div>
+            </div>
+        </div>
+
+
+        <!-- BabulonJS rendering -->
+        <canvas id="renderCanvas"></canvas>
+        <script src="scripts/main.js"></script>
+
+    </body>
 </html>
