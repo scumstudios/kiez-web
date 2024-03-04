@@ -44,8 +44,8 @@
 
 :root{
     --pink: #E0A2FF;
-    --blue: #3900A7;
-    --yellow: #FCE815;
+    --blue: #3900a7;
+    --yellow: #fce815;
     --black: #111111;
 
     --pinktp: rgba(224, 162, 255, 0.8);
@@ -98,20 +98,98 @@ div {
     z-index: -1;
 }
 
-/* LOADING FRAME */
-#loadAnim {
+/* LOADING SPINNER */
+
+@keyframes loader {
+    0% { opacity: 1 }
+    100% { opacity: 0 }
+}
+
+  .loader div {
+    left: 59.52px;
+    top: 21.76px;
+    position: absolute;
+    animation: loader linear 1s infinite;
+    background: var(--yellow);
+    width: 8.96px;
+    height: 25.6px;
+    border-radius: 3.072px / 3.072px;
+    transform-origin: 4.48px 42.24px;
+ }
+
+ .loader div:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.875s;
+    background: var(--yellow);
+}
+  
+.loader div:nth-child(2) {
+    transform: rotate(45deg);
+    animation-delay: -0.75s;
+    background: var(--yellow);
+}
+  
+.loader div:nth-child(3) {
+    transform: rotate(90deg);
+    animation-delay: -0.625s;
+    background: var(--yellow);
+}
+  
+.loader div:nth-child(4) {
+    transform: rotate(135deg);
+    animation-delay: -0.5s;
+    background: var(--yellow);
+}
+
+.loader div:nth-child(5) {
+    transform: rotate(180deg);
+    animation-delay: -0.375s;
+    background: var(--yellow);
+}
+
+.loader div:nth-child(6) {
+    transform: rotate(225deg);
+    animation-delay: -0.25s;
+    background: var(--yellow);
+}
+
+.loader div:nth-child(7) {
+    transform: rotate(270deg);
+    animation-delay: -0.125s;
+    background: var(--yellow);
+}
+
+.loader div:nth-child(8) {
+    transform: rotate(315deg);
+    animation-delay: 0s;
+    background: var(--yellow);
+}
+
+#loadFrame {
+    width: 128px;
+    height: 128px;
+    overflow: hidden;
+    background: rgba(57, 0, 167, 0);
     position: absolute;
     margin-top: calc(50vh - 64px);
     margin-left: calc(50vw - 64px);
-    width: 128px;
-    height: 128px;
-    background-color: var(--pink);
-    background-image: url(../img/logo-kiez.svg);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: contain;
-    display: none;
+    display: inline;
+    z-index: 99;
 }
+  
+.loader {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+}
+
+.loader div {
+    box-sizing: content-box;
+}
+
 
 /* DIALOG FRAME */
 
@@ -127,7 +205,7 @@ div {
     visibility: hidden;
 }
 
-#dialogWrap{
+#dialogWrap {
     margin: 2vh auto;
     background-color: var(--pinktp);
     width: 95%;

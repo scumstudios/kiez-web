@@ -24,38 +24,19 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true, { stencil: true }); 
 
 
-
-
 const createScene = function(){
-    // var loadFrame = window.document.getElementById("loadAnim");
+    // Custom Loading Screen
+    BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
+            document.getElementById("loadFrame").style.display = "inline";
+            return;
+        }
 
-    // function customLoadingScreen() {
-    //     console.log("customLoadingScreen creation")
-    // }
-    // customLoadingScreen.prototype.displayLoadingUI = function () {
-    //     console.log("customLoadingScreen loading")
-    //     loadFrame.innerHTML = "loading";
-    // };
-    // customLoadingScreen.prototype.hideLoadingUI = function () {
-    //     console.log("customLoadingScreen loaded")
-    //     loadFrame.style.display = "none";
-    // };
-    // var loadingScreen = new customLoadingScreen();
-    // engine.loadingScreen = loadingScreen;
+    BABYLON.DefaultLoadingScreen.prototype.hideLoadingUI = function(){
+            document.getElementById("loadFrame").style.display = "none";
+        }
 
-
-
-    // BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
-    //         document.getElementById("loadAnim").style.display = "inline";
-    //         return;
-    //     }
-
-    // BABYLON.DefaultLoadingScreen.prototype.hideLoadingUI = function(){
-    //         document.getElementById("loadAnim").style.display = "none";
-    //         console.log("scene is now loaded");
-    //     }
-
-    // engine.displayLoadingUI();
+    
+    engine.displayLoadingUI();
 
     // Creates a basic Babylon Scene object
     const scene = new BABYLON.Scene(engine);
@@ -143,21 +124,10 @@ const createScene = function(){
             const mesh = scene.meshes[0]
             mesh.dispose();
             }
-        // camMove(1.57);
+        camera.position = new BABYLON.Vector3(0, 0, 0);
         camera.alpha = 1.57;
         camera.beta = 0.75;
         camera.radius = 10;
-
-    }
-
-
-    function loadCheck(){
-        if (document.getElementById("loadAnim").style.display == "none") {
-            document.getElementById("loadAnim").style.display == "inline"
-        }
-        else {
-            document.getElementById("loadAnim").style.display == "none"
-        }
     }
 
     function loadStart(){
@@ -166,12 +136,10 @@ const createScene = function(){
         document.getElementById("poweredContainer").style.visibility = 'visible';
         
         resetScene();
-        loadCheck();
-        
-        
-        BABYLON.SceneLoader.ImportMeshAsync("","assets/", ("000-start.glb")).then((result) => { //TODO Fix Relative Link
-            // engine.displayLoadingUI();
-            result.meshes.forEach(mesh => {
+        engine.displayLoadingUI();
+
+        BABYLON.SceneLoader.Append("assets/", "000-start.glb", scene, function(scene) { //TODO Fix Relative Link
+            scene.meshes.forEach(mesh => {
                 // Set outline
                 if (mesh.name != "zFloor"){
                     mesh.renderOutline = true;
@@ -190,10 +158,7 @@ const createScene = function(){
             mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 load10();
             }))
-            // engine.hideLoadingUI();
         });
-
-        
     }
 
     function load10(){
@@ -201,11 +166,10 @@ const createScene = function(){
         document.getElementById("poweredContainer").style.visibility = 'hidden';
 
         resetScene();
-        loadCheck();
-        // engine.displayLoadingUI();
+        engine.displayLoadingUI();
 
-        BABYLON.SceneLoader.ImportMeshAsync("","assets/", ("100-test.glb")).then((result) => { //TODO Fix Relative Link
-            result.meshes.forEach(mesh => {
+        BABYLON.SceneLoader.Append("assets/", "100-test.glb",scene, function(scene) { //TODO Fix Relative Link
+            scene.meshes.forEach(mesh => {
                 // Set outline
                 if (mesh.name != "zFloor"){
                     mesh.renderOutline = true;
@@ -225,8 +189,8 @@ const createScene = function(){
                     loadStart();
             }))
         });
+
         dialog_pop("REF: Scene 100");
-        // engine.hideLoadingUI();
     }
 
    
@@ -279,11 +243,9 @@ const createScene = function(){
 
     // Optimizer
     var optimizer = new BABYLON.SceneOptimizer(scene, options);
-    optimizer.targetFrameRate = 60;
+    optimizer.targetFrameRate = 30;
     optimizer.trackerDuration = 2500;
     optimizer.start();
-
-    // engine.hideLoadingUI();
 
     return scene;
 };
