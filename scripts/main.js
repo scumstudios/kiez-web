@@ -23,7 +23,6 @@ const canvas = document.getElementById("renderCanvas");
 // Create Engine
 const engine = new BABYLON.Engine(canvas, true, { stencil: true }); 
 
-
 const createScene = function(){
     // Custom Loading Screen
     BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
@@ -51,10 +50,29 @@ const createScene = function(){
     camera.angularSensibilityX = 512;
     camera.angularSensibilityY = 512;
     camera.wheelPrecision = 50;
-    camera.lowerRadiusLimit = 7.5;
-    camera.upperRadiusLimit = 12.5;
+    camera.lowerRadiusLimit = 10;
+    camera.upperRadiusLimit = 10;
     camera.lowerBetaLimit = 0.75;
     camera.upperBetaLimit = 0.75;
+
+    function cam_move(target) { //TODO: Alpha, Beta, Radius
+        const frameRate = 1;
+
+        const camTween = new BABYLON.Animation("camTween", "target", frameRate, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
+
+        const keyFrames = [];
+
+        keyFrames.push ({frame: 0, value: camera.target});
+        keyFrames.push ({frame: 1, value: target});
+        camTween.setKeys(keyFrames);
+
+        const easingFunction = new BABYLON.ElasticEase(); //
+        easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUT);
+        camTween.setEasingFunction(easingFunction);
+
+        camera.animations.push(camTween);
+        scene.beginAnimation(camera, 0, 2, false);
+    };
 
     // Lighting Setup
     const sky = new BABYLON.HemisphericLight("Sky", new BABYLON.Vector3(-0.5, 1, 0), scene);
@@ -63,71 +81,20 @@ const createScene = function(){
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
     
-    // Define Default Material
-    const defmat = new BABYLON.PBRMaterial("defmat", scene);
-    defmat.reflectivityColor = new BABYLON.Color3(0, 0, 0);
-    defmat.transparencyMode = 0;
-    defmat.indexOfRefraction = 1.5;
-    defmat.roughness = 1;
-    defmat.metallic = 0;
-    defmat.metallicF0Factor = 0;
-    
     // Hightlight Layer
     const hl = new BABYLON.HighlightLayer("hl1", scene);
     // hl.innerGlow = false;
     hl.blurHorizontalSize = 0.5;
     hl.blurVerticalSize = 0.5;
 
-
-    // Camera Movement
-
-    // function camMove(destination) {
-        // const frameRate = 1;
-
-        // const camTween = new BABYLON.Animation("camTween", "position", frameRate, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-
-        // const keyFrames = [];
-
-        // keyFrames.push ({frame: 0, value: camera.alpha});
-        // keyFrames.push ({frame: 1, value: destination});
-        // camTween.setKeys(keyFrames);
-
-        // const easingFunction = new BABYLON.QuinticEase();
-        // easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUT);
-        // camTween.setEasingFunction(easingFunction);
-
-        // camera.animations.push(camTween);
-        // scene.beginAnimation(camera, 0, 2, true);
-
-
-
-    //     const FRAMES_PER_SECOND = 60;
-
-    //     const alphaAnimation = Animation.CreateAnimation("alpha", Animation.ANIMATIONTYPE_FLOAT, FRAMES_PER_SECOND, ease);
-
-    //     betaAnimation.setKeys([
-    //         {
-    //             frame: 0,
-    //             value: camera.alpha,
-    //         },
-    //         {
-    //             frame: 100,
-    //             value: to,
-    //         },
-    //     ]);
-    // };
-
-
     // Reset Scene
     function resetScene(){
         while(scene.meshes.length) {
             const mesh = scene.meshes[0]
-            mesh.dispose();
+            mesh.dispose(false, true); //true value also disposes materials and textures
             }
-        camera.position = new BABYLON.Vector3(0, 0, 0);
-        camera.alpha = 1.57;
-        camera.beta = 0.75;
-        camera.radius = 10;
+
+        camera.setPosition(new BABYLON.Vector3(1.57, 0.75, 10));
     }
 
     function loadStart(){
@@ -141,7 +108,7 @@ const createScene = function(){
         BABYLON.SceneLoader.Append("assets/", "000-start.glb", scene, function(scene) { //TODO Fix Relative Link
             scene.meshes.forEach(mesh => {
                 // Set outline
-                if (mesh.name != "zFloor"){
+                if (mesh.name != "GEO.Shadow"){
                     mesh.renderOutline = true;
                     mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
                     mesh.outlineWidth = 0.005;
@@ -156,19 +123,20 @@ const createScene = function(){
             hl.addMesh(mesh, BABYLON.Color3.Yellow());
             mesh.actionManager = new BABYLON.ActionManager(scene);
             mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                load10();
+                load010();
+                cam_move(new BABYLON.Vector3(0,1,0));
             }))
         });
     }
 
-    function load10(){
+    function load010(){
         document.getElementById("logoContainer").style.visibility = 'hidden';
         document.getElementById("poweredContainer").style.visibility = 'hidden';
 
         resetScene();
         engine.displayLoadingUI();
 
-        BABYLON.SceneLoader.Append("assets/", "100-test.glb",scene, function(scene) { //TODO Fix Relative Link
+        BABYLON.SceneLoader.Append("assets/", "010-test.glb",scene, function(scene) { //TODO Fix Relative Link
             scene.meshes.forEach(mesh => {
                 // Set outline
                 if (mesh.name != "zFloor"){
@@ -187,37 +155,15 @@ const createScene = function(){
             mesh.actionManager = new BABYLON.ActionManager(scene);
             mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     loadStart();
+                    cam_move(new BABYLON.Vector3(0,0,0));
             }))
         });
 
-        dialog_pop("REF: Scene 100");
+        dialog_pop("REF: Scene 010");
     }
 
    
     loadStart();
-
-    // // Camera Movement
-    // var camMover = new BABYLON.TransformNode("camMover", scene);
-    // camera.parent = camMover;
-
-    // function cam_move(destination) {
-    //     const frameRate = 1;
-
-    //     const camTween = new BABYLON.Animation("camTween", "position", frameRate, BABYLON.Animation.ANIMATIONTYPE_VECTOR3, BABYLON.Animation.ANIMATIONLOOPMODE_CONSTANT);
-
-    //     const keyFrames = [];
-
-    //     keyFrames.push ({frame: 0, value: camMover.position});
-    //     keyFrames.push ({frame: 1, value: destination});
-    //     camTween.setKeys(keyFrames);
-
-    //     const easingFunction = new BABYLON.QuinticEase();
-    //     easingFunction.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUT);
-    //     camTween.setEasingFunction(easingFunction);
-
-    //     camMover.animations.push(camTween);
-    //     scene.beginAnimation(camMover, 0, 2, true);
-    // };
     
 
     // POST PROCESSING
