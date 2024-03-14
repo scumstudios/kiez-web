@@ -47,8 +47,9 @@
     --blue: #3900a7;
     --yellow: #fce815;
     --black: #111111;
+    --white: #eeeeee;
 
-    --pinktp: rgba(224, 162, 255, 0.8);
+    --pinktp: rgba(224, 162, 255, 0.1);
 }
 
 /* RESET */
@@ -214,8 +215,8 @@ div {
     display: flex;
     border-style: solid;
     border-width: 2px;
-    border-color: var(--yellow);
-    border-radius: 10px;
+    border-color: var(--pink);
+    border-radius: 0px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
 }
@@ -237,7 +238,7 @@ div {
     width: auto;
     font-family: bobby, Arial, Helvetica, sans-serif;
     font-size: 4vmin;
-    color: var(--black);
+    color: var(--white);
 }
 
 /* LOGO */
