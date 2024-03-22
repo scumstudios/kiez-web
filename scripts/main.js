@@ -272,7 +272,7 @@ const createScene = function(){
 
 
     // Show Inspector
-    scene.debugLayer.show();
+    // scene.debugLayer.show();
 
     // Rendering Optimizations
     engine.setHardwareScalingLevel(1);
