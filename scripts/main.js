@@ -1,15 +1,15 @@
 // Dialog Interaction Function
 function dialog_pop(text) {
-    if (document.getElementById("dialogFrame").style.visibility == "visible") {
+    if (document.getElementById("dialogFrame").style.display == "inline") {
         if (document.getElementById("dialogText").textContent != text) {
             document.getElementById("dialogText").textContent = text;
         }
         else {
-            document.getElementById("dialogFrame").style.visibility = 'hidden';
+            document.getElementById("dialogFrame").style.display = "none";
         }
     }
     else {
-        document.getElementById("dialogFrame").style.visibility = 'visible';
+        document.getElementById("dialogFrame").style.display = 'inline';
         document.getElementById("dialogText").textContent = text;  
     }
 }
@@ -24,18 +24,6 @@ const canvas = document.getElementById("renderCanvas");
 const engine = new BABYLON.Engine(canvas, true, { stencil: true }); 
 
 const createScene = function(){
-    // Custom Loading Screen
-    BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
-            document.getElementById("loadFrame").style.display = "inline";
-            return;
-        }
-
-    BABYLON.DefaultLoadingScreen.prototype.hideLoadingUI = function(){
-            document.getElementById("loadFrame").style.display = "none";
-        }
-
-    
-    engine.displayLoadingUI();
 
     // Creates a basic Babylon Scene object
     const scene = new BABYLON.Scene(engine);
@@ -51,7 +39,7 @@ const createScene = function(){
     camera.angularSensibilityY = 512;
     camera.wheelPrecision = 50;
     camera.lowerRadiusLimit = 3.5;
-    camera.upperRadiusLimit = 10;
+    camera.upperRadiusLimit = 15;
     camera.lowerBetaLimit = 0.75;
     camera.upperBetaLimit = 0.75;
 
@@ -97,88 +85,128 @@ const createScene = function(){
     };
 
     // Lighting Setup
-    const sky = new BABYLON.HemisphericLight("Sky", new BABYLON.Vector3(-0.5, 1, 0), scene);
-    sky.intensity = 1;
+    const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(0.75, -1, -0.5), scene);
+    sun.intensity = 1;
+    sun.autoCalcShadowZBounds = true;
+
+    // Shadows
+    var sg = new BABYLON.ShadowGenerator(1024, sun);
     
+    sg.bias = 0.0075;
+    sg.darkness = 0.85;
+    sg.usePercentageCloserFiltering = true;
+    sg.filteringQuality = 0;
+
+    const vcolmat = new BABYLON.StandardMaterial("vcolmat", scene);
+    vcolmat.specularColor = new BABYLON.Color3(0, 0, 0);
+    vcolmat.emissiveColor = new BABYLON.Color3(0.25, 0.25, 0.25);
+
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
     
     // Hightlight Layer
     const hl = new BABYLON.HighlightLayer("hl1", scene);
-    // hl.innerGlow = false;
-    hl.blurHorizontalSize = 0.5;
-    hl.blurVerticalSize = 0.5;
+    hl.blurHorizontalSize = 0.33;
+    hl.blurVerticalSize = 0.33;
 
-    // Reset Scene
+    var ground = BABYLON.MeshBuilder.CreateGround("ground", {width:5, height:5}, scene);
+    ground.material = new BABYLON.ShadowOnlyMaterial('shadowOnly', scene)
+    ground.receiveShadows = true;
+
     function resetScene(){
-        while(scene.meshes.length) {
-            const mesh = scene.meshes[0]
-            mesh.dispose(false, true); //true value also disposes materials and textures
-            }
-
-        camera.setPosition(new BABYLON.Vector3(1.57, 0.75, 10));
-    }
+        scene.getMeshById("__root__").dispose(false, true); //true value also disposes materials and textures
+        for (let i = 0; i < scene.animationGroups.length; i++) {
+            scene.animationGroups[i].removeTargetedAnimation(""); // TODO: Clear Actions
+        }
+    };
 
     function loadStart(){
-        document.getElementById("dialogFrame").style.visibility = 'hidden'; // TEMP FOR DEV
-        document.getElementById("logoContainer").style.visibility = 'visible';
-        document.getElementById("poweredContainer").style.visibility = 'visible';
+        // engine.displayLoadingUI();
+        document.getElementById("loadFrame").style.display = 'inline';
         
-        resetScene();
-        engine.displayLoadingUI();
-
-        BABYLON.SceneLoader.Append("assets/", "000-start.glb", scene, function(scene) { //TODO Fix Relative Link
-            scene.meshes.forEach(mesh => {
-                // Set outline
-                if (mesh.name != "GEO.Shadow"){
-                    mesh.renderOutline = true;
-                    mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-                    mesh.outlineWidth = 0.005;
-                }
-                for (i = 0; i < scene.animationGroups.length; i++) {
-                    scene.animationGroups[i].play(true);
-                }            
+        BABYLON.SceneLoader.LoadAssetContainer("assets/", "000-start.glb", scene, function(container) {
+            container.meshes.forEach(mesh => {
+                mesh.material = vcolmat;
+                mesh.receiveShadows = true;
+                sg.addShadowCaster(mesh, true);
+                mesh.renderOutline = true;
+                mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                mesh.outlineWidth = 0.005;
             });
 
-            // SCENE TRIGGERS
+            container.addAllToScene();
+
             let mesh = scene.getMeshById("EVT.Booths");
             hl.addMesh(mesh, BABYLON.Color3.Yellow());
             mesh.actionManager = new BABYLON.ActionManager(scene);
             mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 load010();
-            }))
+            }));
         });
-    }
+
+        document.getElementById("loadFrame").style.display = 'none';
+    };
 
     function load010(){
-        document.getElementById("logoContainer").style.visibility = 'hidden';
-        document.getElementById("poweredContainer").style.visibility = 'hidden';
+        document.getElementById("logoContainer").style.display = 'none';
+        document.getElementById("poweredContainer").style.display = 'none';
 
         resetScene();
-        engine.displayLoadingUI();
 
-        BABYLON.SceneLoader.Append("assets/", "010-links_rechts.glb",scene, function(scene) { //TODO Fix Relative Link
-            scene.meshes.forEach(mesh => {
-                // Set outline
-                if (mesh.name != "GEO.Shadow"){
-                    mesh.renderOutline = true;
-                    mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-                    mesh.outlineWidth = 0.005;
-                }
-                for (i = 0; i < scene.animationGroups.length; i++) {
-                    scene.animationGroups[i].play(false);
-                }            
+        document.getElementById("loadFrame").style.display = 'inline';
+
+        BABYLON.SceneLoader.LoadAssetContainer("assets/", "010-links_rechts.glb", scene, function(container) {
+            container.meshes.forEach(mesh => {
+                mesh.material = vcolmat;
+                mesh.receiveShadows = true;
+                sg.addShadowCaster(mesh, true);
+                mesh.renderOutline = true;
+                mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                mesh.outlineWidth = 0.005;
             });
+
+            scene.stopAllAnimations();
+            container.addAllToScene();
+
+            // console.log(container.animationGroups);
+
+            let openL = scene.getMeshById("GEO.Belgium.L");
+            hl.addMesh(openL, BABYLON.Color3.Yellow());
+            openL.actionManager = new BABYLON.ActionManager(scene);
+            let openLAction = openL.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+                    camAnim(new BABYLON.Vector3(1, 0.5, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                    for (let i = 0; i < container.animationGroups.length; i++) {
+                        container.animationGroups[i].play();
+                    }
+                    hl.removeMesh(scene.getMeshById("GEO.Belgium.L"));
+                    hl.removeMesh(scene.getMeshById("GEO.Belgium.R"));
+                    openL.actionManager.unregisterAction(openLAction);
+                    openR.actionManager.unregisterAction(openRAction);
+            }));
+
+            let openR = scene.getMeshById("GEO.Belgium.R");
+            hl.addMesh(openR, BABYLON.Color3.Yellow());
+            openR.actionManager = new BABYLON.ActionManager(scene);
+            let openRAction = openR.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+                    camAnim(new BABYLON.Vector3(1, 0.5, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                    for (let i = 0; i < container.animationGroups.length; i++) {
+                        container.animationGroups[i].play();
+                    }
+                    hl.removeMesh(scene.getMeshById("GEO.Belgium.L"));
+                    hl.removeMesh(scene.getMeshById("GEO.Belgium.R"));
+                    openL.actionManager.unregisterAction(openLAction);
+                    openR.actionManager.unregisterAction(openRAction);
+            }));
 
             // SCENE TRIGGERS
             let pdva = scene.getMeshById("EVT.PVDA");
-            hl.addMesh(pdva, BABYLON.Color3.Yellow())
+            hl.addMesh(pdva, BABYLON.Color3.Yellow());
             pdva.actionManager = new BABYLON.ActionManager(scene);
             pdva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.8, 0.75, 0.15), 0.5);
                     dialog_pop("PVDA");
-                    // hl.addMesh(scene.getMeshById("EVT.PVDA"));
-            }))
+                    hl.removeMesh(pdva);
+            }));
 
             let groen = scene.getMeshById("EVT.Groen");
             hl.addMesh(groen, BABYLON.Color3.Yellow())
@@ -186,6 +214,7 @@ const createScene = function(){
             groen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.55, 0.75, 0.15), 0.5);
                     dialog_pop("Groen");
+                    hl.removeMesh(groen);
             }))
 
             let vooruit = scene.getMeshById("EVT.Vooruit");
@@ -194,6 +223,7 @@ const createScene = function(){
             vooruit.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.275, 0.75, 0.15), 0.5);
                     dialog_pop("Vooruit");
+                    hl.removeMesh(vooruit);
             }))
 
             let cdnv = scene.getMeshById("EVT.CDNV");
@@ -202,6 +232,7 @@ const createScene = function(){
             cdnv.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0, 0.75, 0.15), 0.5);
                     dialog_pop("CD&V");
+                    hl.removeMesh(cdnv);
             }))
 
             let vld = scene.getMeshById("EVT.VLD");
@@ -210,6 +241,7 @@ const createScene = function(){
             vld.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.275, 0.75, 0.15), 0.5);
                     dialog_pop("Open VLD");
+                    hl.removeMesh(vld);
             }))
 
             let nva = scene.getMeshById("EVT.NVA");
@@ -218,6 +250,7 @@ const createScene = function(){
             nva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.55, 0.75, 0.15), 0.5);
                     dialog_pop("NVA");
+                    hl.removeMesh(nva);
             }))
 
             let vlb = scene.getMeshById("EVT.VLB");
@@ -226,30 +259,23 @@ const createScene = function(){
             vlb.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.8, 0.75, 0.15), 0.5);
                     dialog_pop("Vlaams Belang");
+                    hl.removeMesh(vlb);
             }))
+
         });
-    }
+
+        document.getElementById("loadFrame").style.display = 'none';
+    };
 
    
     loadStart();
-    
 
-    // POST PROCESSING
-
-    var defaultPipeline = new BABYLON.DefaultRenderingPipeline("DefaultRenderingPipeline", true, scene, scene.cameras);
-    if (defaultPipeline.isSupported) {
-        // MSAA
-        defaultPipeline.samples = 1; // 1 by default
-
-        /* imageProcessing */
-        defaultPipeline.imageProcessingEnabled = false;
-    }
 
     // Show Inspector
-    // scene.debugLayer.show();
+    scene.debugLayer.show();
 
     // Rendering Optimizations
-    engine.setHardwareScalingLevel(0.75);
+    engine.setHardwareScalingLevel(1);
 
     var options = new BABYLON.SceneOptimizerOptions();
     options.addOptimization(new BABYLON.HardwareScalingOptimization(0.75, 1.5));

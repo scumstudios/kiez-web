@@ -116,6 +116,7 @@ div {
     height: 25.6px;
     border-radius: 3.072px / 3.072px;
     transform-origin: 4.48px 42.24px;
+    display: inline;
  }
 
  .loader div:nth-child(1) {
@@ -172,8 +173,8 @@ div {
     overflow: hidden;
     background: rgba(57, 0, 167, 0);
     position: absolute;
-    margin-top: calc(50vh - 64px);
-    margin-left: calc(50vw - 64px);
+    top: calc(50vh - 64px);
+    left: calc(50vw - 64px);
     display: inline;
     z-index: 99;
 }
@@ -203,7 +204,7 @@ div {
     max-height: 22vh;
     width: 100%;
     max-width: 640px;
-    visibility: hidden;
+    display: none;
 }
 
 #dialogWrap {
