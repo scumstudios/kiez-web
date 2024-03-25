@@ -27,6 +27,7 @@ const createScene = function(){
 
     // Creates a basic Babylon Scene object
     const scene = new BABYLON.Scene(engine);
+    scene.useRightHandedSystem = true
 
     // Create Camera
     const camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.75, 10, new BABYLON.Vector3(0, 0, 0), scene);
@@ -85,7 +86,7 @@ const createScene = function(){
     };
 
     // Lighting Setup
-    const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(0.75, -1, -0.5), scene);
+    const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(-0.75, -1, -0.5), scene);
     sun.intensity = 1;
     sun.autoCalcShadowZBounds = true;
 
@@ -109,21 +110,67 @@ const createScene = function(){
     hl.blurHorizontalSize = 0.33;
     hl.blurVerticalSize = 0.33;
 
-    var ground = BABYLON.MeshBuilder.CreateGround("ground", {width:5, height:5}, scene);
-    ground.material = new BABYLON.ShadowOnlyMaterial('shadowOnly', scene)
+
+    // Create Initial Scene
+
+    var ground = BABYLON.MeshBuilder.CreateGround("GEO.Ground", {width:5, height:5}, scene);
+    ground.material = new BABYLON.ShadowOnlyMaterial('MAT.ShadowCatcher', scene)
     ground.receiveShadows = true;
 
-    function resetScene(){
-        scene.getMeshById("__root__").dispose(false, true); //true value also disposes materials and textures
-        for (let i = 0; i < scene.animationGroups.length; i++) {
-            scene.animationGroups[i].removeTargetedAnimation(""); // TODO: Clear Actions
-        }
+        
+    document.getElementById("loadFrame").style.display = 'inline';
+        
+        BABYLON.SceneLoader.LoadAssetContainer("assets/", "000-start.glb", scene, function(container) {
+            container.meshes.forEach(mesh => {
+                mesh.material = vcolmat;
+                mesh.receiveShadows = true;
+                sg.addShadowCaster(mesh, true);
+                mesh.renderOutline = true;
+                mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
+                mesh.outlineWidth = 0.005;
+            });
+
+            container.addAllToScene();
+
+            let mesh = scene.getMeshById("EVT.Booths");
+            hl.addMesh(mesh, BABYLON.Color3.Yellow());
+            mesh.actionManager = new BABYLON.ActionManager(scene);
+            mesh.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+                load010();
+            }));
+        });
+
+    document.getElementById("loadFrame").style.display = 'none';
+
+    
+    
+    function resetScene(){ //TODO: Fix disposal error
+        scene.getMeshByName("__root__").dispose(false, true); //true value also disposes materials and textures
+        scene.animationGroups = [];
+        scene.materials = [];
+
+        camAnim(new BABYLON.Vector3(1.57, 0.75, 20), new BABYLON.Vector3(0, 0, 0), 0.01);
+        
+        document.getElementById("homeButton").style.display = "none";
+        document.getElementById("dialogFrame").style.display = "none";
+        document.getElementById("logoContainer").style.display = 'none';
+        document.getElementById("poweredContainer").style.display = 'none';
     };
 
+    function addHome(){
+        let home = document.getElementById("homeButton");
+        home.style.display = "inline";
+        home.addEventListener('click', event => {loadStart();});
+    }
+
     function loadStart(){
-        // engine.displayLoadingUI();
+        resetScene();
+
         document.getElementById("loadFrame").style.display = 'inline';
-        
+
+        document.getElementById("logoContainer").style.display = 'inline';
+        document.getElementById("poweredContainer").style.display = 'inline';
+
         BABYLON.SceneLoader.LoadAssetContainer("assets/", "000-start.glb", scene, function(container) {
             container.meshes.forEach(mesh => {
                 mesh.material = vcolmat;
@@ -148,11 +195,7 @@ const createScene = function(){
     };
 
     function load010(){
-        document.getElementById("logoContainer").style.display = 'none';
-        document.getElementById("poweredContainer").style.display = 'none';
-
         resetScene();
-
         document.getElementById("loadFrame").style.display = 'inline';
 
         BABYLON.SceneLoader.LoadAssetContainer("assets/", "010-links_rechts.glb", scene, function(container) {
@@ -174,7 +217,7 @@ const createScene = function(){
             hl.addMesh(openL, BABYLON.Color3.Yellow());
             openL.actionManager = new BABYLON.ActionManager(scene);
             let openLAction = openL.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1, 0.5, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                    camAnim(new BABYLON.Vector3(1, 0, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
                     for (let i = 0; i < container.animationGroups.length; i++) {
                         container.animationGroups[i].play();
                     }
@@ -188,7 +231,7 @@ const createScene = function(){
             hl.addMesh(openR, BABYLON.Color3.Yellow());
             openR.actionManager = new BABYLON.ActionManager(scene);
             let openRAction = openR.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1, 0.5, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                    camAnim(new BABYLON.Vector3(1, 0, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
                     for (let i = 0; i < container.animationGroups.length; i++) {
                         container.animationGroups[i].play();
                     }
@@ -203,7 +246,7 @@ const createScene = function(){
             hl.addMesh(pdva, BABYLON.Color3.Yellow());
             pdva.actionManager = new BABYLON.ActionManager(scene);
             pdva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.8, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.8, 0.75, 0.15), 0.5);
                     dialog_pop("PVDA");
                     hl.removeMesh(pdva);
             }));
@@ -212,7 +255,7 @@ const createScene = function(){
             hl.addMesh(groen, BABYLON.Color3.Yellow())
             groen.actionManager = new BABYLON.ActionManager(scene);
             groen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.55, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.55, 0.75, 0.15), 0.5);
                     dialog_pop("Groen");
                     hl.removeMesh(groen);
             }))
@@ -221,7 +264,7 @@ const createScene = function(){
             hl.addMesh(vooruit, BABYLON.Color3.Yellow())
             vooruit.actionManager = new BABYLON.ActionManager(scene);
             vooruit.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0.275, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.275, 0.75, 0.15), 0.5);
                     dialog_pop("Vooruit");
                     hl.removeMesh(vooruit);
             }))
@@ -230,7 +273,7 @@ const createScene = function(){
             hl.addMesh(cdnv, BABYLON.Color3.Yellow())
             cdnv.actionManager = new BABYLON.ActionManager(scene);
             cdnv.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(0, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0, 0.75, 0.15), 0.5);
                     dialog_pop("CD&V");
                     hl.removeMesh(cdnv);
             }))
@@ -239,7 +282,7 @@ const createScene = function(){
             hl.addMesh(vld, BABYLON.Color3.Yellow())
             vld.actionManager = new BABYLON.ActionManager(scene);
             vld.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.275, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.275, 0.75, 0.15), 0.5);
                     dialog_pop("Open VLD");
                     hl.removeMesh(vld);
             }))
@@ -248,7 +291,7 @@ const createScene = function(){
             hl.addMesh(nva, BABYLON.Color3.Yellow())
             nva.actionManager = new BABYLON.ActionManager(scene);
             nva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.55, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.55, 0.75, 0.15), 0.5);
                     dialog_pop("NVA");
                     hl.removeMesh(nva);
             }))
@@ -257,7 +300,7 @@ const createScene = function(){
             hl.addMesh(vlb, BABYLON.Color3.Yellow())
             vlb.actionManager = new BABYLON.ActionManager(scene);
             vlb.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                    camAnim(new BABYLON.Vector3(1.57, 0.5, 5), new BABYLON.Vector3(-0.8, 0.75, 0.15), 0.5);
+                    camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.8, 0.75, 0.15), 0.5);
                     dialog_pop("Vlaams Belang");
                     hl.removeMesh(vlb);
             }))
@@ -265,10 +308,11 @@ const createScene = function(){
         });
 
         document.getElementById("loadFrame").style.display = 'none';
+        addHome();
     };
 
    
-    loadStart();
+    // loadStart();
 
 
     // Show Inspector

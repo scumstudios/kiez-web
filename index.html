@@ -49,9 +49,8 @@
 
         <!-- Start Screen -->
         <div id="logoContainer">
-            <div id="logoFrame"></div>
             <div style="width: 100%; position: absolute; top: calc(10vh + 1em );">
-                <p style="text-align: center; font-family: bobby, Arial, Helvetica, sans-serif; font-size: 1.5em; color: white;">Gen Z Kiest </p>
+                <p id="logoTagline">Gen Z Kiest </p>
             </div>
         </div>
 
@@ -65,6 +64,8 @@
             </div>  
         </div>
 
+        
+
         <!-- Dialog Frame -->
         <div id="dialogFrame">
             <div id="dialogWrap">
@@ -75,10 +76,14 @@
             </div>
         </div>
 
+        <!-- Home Button -->
+        <button id="homeButton"></button>
 
         <!-- BabulonJS rendering -->
         <canvas id="renderCanvas"></canvas>
         <script src="scripts/main.js"></script>
+
+       
 
     </body>
 </html>

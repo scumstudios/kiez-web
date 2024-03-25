@@ -242,6 +242,25 @@ div {
     color: var(--white);
 }
 
+/* HOME BUTTON */
+
+#homeButton {
+    position: absolute;
+    bottom: 32px;
+    left: calc(50vw - 36px);
+    width: 72px;
+    height: 72px;
+    z-index: 99;
+    background-image: url(../img/home.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+    display: none;
+    cursor: pointer;
+}
+
 /* LOGO */
 
 #logoContainer {
@@ -256,6 +275,13 @@ div {
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
+}
+
+#logoTagline {
+    text-align: center;
+    font-family: bobby, Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+    color: var(--white);
 }
 
 /* POWERED BY */
