@@ -36,7 +36,7 @@ export default function sc000(engine) {
         evt_lr.actionManager = new BABYLON.ActionManager(scene);
         evt_lr.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn/010.html");
+            main.dialogPop("Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../kiez-web/scn/010.html");
         }));
 
         let evt_lr2 = scene.getMeshById("EVT.Compass.Needle");
@@ -44,7 +44,7 @@ export default function sc000(engine) {
         evt_lr2.actionManager = new BABYLON.ActionManager(scene);
         evt_lr2.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn/010.html");
+            main.dialogPop("Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../kiez-web/scn/010.html");
         }));
 
         

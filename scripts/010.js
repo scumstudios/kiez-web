@@ -7,11 +7,6 @@ export default function sc010(engine) {
     let hl = main.hl;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
-    // let camera = main.camera
-    
-    let home = document.getElementById("homeButton");
-    home.style.display = "inline";
-    home.addEventListener('click', event => {main.loadScene(sc000);});
 
     // Import GLB
     BABYLON.SceneLoader.LoadAssetContainer("../assets/", "010-links_rechts.glb", scene, function(container) {
