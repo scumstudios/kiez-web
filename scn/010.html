@@ -13,13 +13,13 @@
         <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
         <link rel="icon" type="image/x-icon" href="favicon.ico">
-        <link rel="manifest" href="site.webmanifest">
-        <link rel="mask-icon" href="safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="manifest" href="../site.webmanifest">
+        <link rel="mask-icon" href="../safari-pinned-tab.svg" color="#5bbad5">
         <meta name="msapplication-TileColor" content="#da532c">
         <meta name="theme-color" content="#ffffff">
 
         <!-- CSS -->
-        <link rel="stylesheet" href="style/style.css">
+        <link rel="stylesheet" href="../style/style.css">
 
         <!-- Babylon Loaders -->
         <script src="https://cdn.babylonjs.com/babylon.js"></script>
@@ -45,45 +45,35 @@
                 <div></div>
                 <div></div>
             </div>
-        </div>
-
-        <!-- Start Screen -->
-        <div id="logoContainer">
-            <div style="width: 100%; position: absolute; top: calc(10vh + 1em );">
-                <p id="logoTagline">Gen Z Kiest </p>
-            </div>
-        </div>
-
-        <div id="poweredContainer">
-            <div>
-                <p style="text-align: center;">POWERED BY</p>
-            </div>        
-            <div id="poweredLogos">
-                <a href="https://www.scumstudios.be" target="_blank"><div class="poweredLogo" id="logoScum"></div></a>
-                <a href="https://www.gva.be" target="_blank"><div class="poweredLogo" id="logoGva"></div></a>
-            </div>  
-        </div>
-
-        
+        </div>        
 
         <!-- Dialog Frame -->
         <div id="dialogFrame">
-                <div id="dialogText">
-                    Lorem Ipsum
+            <div id="dialogText">
+                Lorem Ipsum
             </div>
             <button id="dialogButton">>>></button>
         </div>
 
-        
+        <!-- Home Button -->
+        <a href="../index.html"><button id="homeButton"></button></a>
+
+        <!-- Social Button -->
+        <a href="https://instagram.com/kiez.nu" target="_blank">
+            <div id="socialBar">
+                    <img src="../img/instagram.svg" width="24px" height="24px" alt="Volg Kiez op Instagram!">
+                    <p>kiez.nu</p>
+            </div>
+        </a>
 
         <!-- BabulonJS rendering -->
         <canvas id="renderCanvas"></canvas>
         <script type="module" src="../scripts/main.js"></script>
         <script type="module">
             import { loadScene } from "../scripts/main.js"
-            import sc000 from '../scripts/000.js';
+            import sc010 from '../scripts/010.js';
 
-            loadScene(sc000);
+            loadScene(sc010);
         </script>
 
 

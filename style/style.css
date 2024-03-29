@@ -49,7 +49,7 @@
     --black: #111111;
     --white: #eeeeee;
 
-    --pinktp: rgba(224, 162, 255, 0.1);
+    --pinktp: rgba(224, 162, 255, 0.25);
 }
 
 /* RESET */
@@ -72,6 +72,8 @@ html, body {
 
 div {
     z-index: 99;
+    padding: 0;
+    margin: 0;
 }
 
 img {
@@ -85,9 +87,8 @@ p {
     margin: 0;
 }
 
-div {
-    padding: 0;
-    margin: 0;
+a {
+    color: var(--white);
 }
 
 /* BABYLON RENDER CANVAS */
@@ -199,57 +200,53 @@ div {
     position: absolute;
     left: 0;
     right: 0;
+    top: 16px;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
     max-height: 22vh;
-    width: 100%;
+    width: calc(100% - 24px);
     max-width: 640px;
     display: none;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 
-#dialogWrap {
-    margin: 2vh auto;
-    background-color: var(--pinktp);
-    width: 95%;
-    max-width: 1280px;
-    height: 20vh;
-    display: flex;
+#dialogText {
+    grid-column: span 4;
+    padding: 2vh;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: bobby, Arial, Helvetica, sans-serif;
+    font-size: 1.4em;
+    color: var(--white);
     border-style: solid;
     border-width: 2px;
     border-color: var(--pink);
     border-radius: 0px;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    background-color: var(--pinktp);
 }
 
-#dialogPortrait {
-    height: 100%;
-    min-width: 20vh;
-    flex: 1;
-    /* background-image: url(img/kiez_logo.jpg); */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-}
-
-#dialogText {
-    padding: 2vh;
-    flex: 4;
-    width: auto;
-    font-family: bobby, Arial, Helvetica, sans-serif;
-    font-size: 4vmin;
-    color: var(--white);
+#dialogButton {
+    grid-column: 4;
+    background-color: var(--yellow);
+    border-style: solid;
+    border-width: 0px 2px 2px 2px;
+    border-color: var(--pink);
+    padding: 0.33em;
+    color: var(--black);
+    font-family: os-bold, Arial, Helvetica, sans-serif;;
+    font-size: 1.5em;
 }
 
 /* HOME BUTTON */
 
 #homeButton {
     position: absolute;
-    bottom: 32px;
-    left: calc(50vw - 36px);
-    width: 72px;
-    height: 72px;
+    bottom: 64px;
+    left: calc(50vw - 24px);
+    width: 48px;
+    height: 48px;
     z-index: 99;
     background-image: url(../img/home.svg);
     background-repeat: no-repeat;
@@ -257,8 +254,21 @@ div {
     background-size: cover;
     border: 0;
     background-color: rgba(0, 0, 0, 0);
-    display: none;
+    /* display: none; */
     cursor: pointer;
+}
+
+#socialBar {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: grid;
+    align-items: center;
+    grid-template-columns: auto auto;
+    gap: 2px;
+    height: 24px;
+    font-family: bobby, Arial, Helvetica, sans-serif;;
 }
 
 /* LOGO */
