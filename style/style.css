@@ -116,7 +116,7 @@ div {
     height: 25.6px;
     border-radius: 3.072px / 3.072px;
     transform-origin: 4.48px 42.24px;
-    display: inline;
+    display: none;
  }
 
  .loader div:nth-child(1) {
