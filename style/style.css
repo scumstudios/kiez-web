@@ -330,3 +330,12 @@ a {
 #logoGva {
     background-image: url(../img/logo-gva.svg);
 }
+
+/* PARTICLE */
+
+#prt {
+    width: 16x;
+    height: 16px;
+    background-color: var(--yellow);
+    display: none;
+}

@@ -23,41 +23,13 @@ export let hl
 // Dialog Interaction Function
 export function dialogPop(text, link, link_url) {
 
-        document.getElementById("dialogFrame").style.display = 'grid';
-        document.getElementById("dialogText").textContent = text;
-        document.getElementById("dialogButton").style.display = "inline"
-        document.getElementById("dialogButton").addEventListener("click", function() {
-            window.location.href = link_url;
-        });
+    document.getElementById("dialogFrame").style.display = 'grid';
+    document.getElementById("dialogText").textContent = text;
+    document.getElementById("dialogButton").style.display = "inline"
+    document.getElementById("dialogButton").addEventListener("click", function() {
+        window.location.href = link_url;
+    });
 
-
-    // if (document.getElementById("dialogFrame").style.display == "grid") {
-    //     if (document.getElementById("dialogText").textContent != text) {
-    //         document.getElementById("dialogText").textContent = text;
-    //     }
-    //     else {
-    //         document.getElementById("dialogFrame").style.display = "none";
-    //     }
-    // }
-    // else {
-        // document.getElementById("logoContainer").style.display = 'none';
-        // document.getElementById("dialogFrame").style.display = 'grid';
-        // document.getElementById("dialogText").textContent = text;
-        // document.getElementById("dialogButton").style.display = "inline"
-        // document.getElementById("dialogButton").addEventListener("click", function() {
-        //     window.location.href = link_url;
-        // });
-
-        // if (link) {
-        //     document.getElementById("dialogButton").display = "inline";
-        //     document.getElementById("dialogButton").addEventListener("click", function() {
-        //         window.location.href = link_url;
-        //     });
-        // }
-        // else {
-        //     document.getElementById("dialogButton").style.display = "none";
-        // }
-    // }
 }
 
 export function camAnim(pos, lookAt, duration) {
@@ -153,6 +125,17 @@ export function loadScene(extScene) {
     hl.blurVerticalSize = 0.33;
 
     extScene();
+
+    engine.setHardwareScalingLevel(0.75);
+
+    var options = new BABYLON.SceneOptimizerOptions();
+    options.addOptimization(new BABYLON.HardwareScalingOptimization(0.75, 1.5));
+
+    // Optimizer
+    var optimizer = new BABYLON.SceneOptimizer(scene, options);
+    optimizer.targetFrameRate = 30;
+    optimizer.trackerDuration = 2500;
+    optimizer.start();
 
     // Register a render loop to repeatedly render the scene
     engine.runRenderLoop(function () {
