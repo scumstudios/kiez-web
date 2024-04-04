@@ -4,7 +4,7 @@ import { dialogPop } from "./main.js";
 
 export default function sc050(engine) {
     let scene = main.scene;
-    let hl = main.hl;
+    let hlB = main.hlB;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
 

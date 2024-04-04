@@ -4,7 +4,7 @@ import { dialogPop } from "./main.js";
 
 export default function sc010(engine) {
     let scene = main.scene;
-    let hl = main.hl;
+    let hlB = main.hlB;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
 
@@ -24,102 +24,102 @@ export default function sc010(engine) {
       
         // EVT: Open Up
         let openL = scene.getMeshById("GEO.Belgium.L");
-        hl.addMesh(openL, BABYLON.Color3.Yellow());
+        hlB.addMesh(openL, BABYLON.Color3.White());
         openL.actionManager = new BABYLON.ActionManager(scene);
         let openLAction = openL.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                main.camAnim(new BABYLON.Vector3(1, 0, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                main.camAnim(1, 0, 15, new BABYLON.Vector3(0, 0, 0), 0.75);
                 for (let i = 0; i < container.animationGroups.length; i++) {
                         container.animationGroups[i].play();
                 }
-                hl.removeMesh(scene.getMeshById("GEO.Belgium.L"));
-                hl.removeMesh(scene.getMeshById("GEO.Belgium.R"));
+                hlB.removeMesh(scene.getMeshById("GEO.Belgium.L"));
+                hlB.removeMesh(scene.getMeshById("GEO.Belgium.R"));
                 openL.actionManager.unregisterAction(openLAction);
                 openR.actionManager.unregisterAction(openRAction);
         }));
         
         let openR = scene.getMeshById("GEO.Belgium.R");
-        hl.addMesh(openR, BABYLON.Color3.Yellow());
+        hlB.addMesh(openR, BABYLON.Color3.White());
         openR.actionManager = new BABYLON.ActionManager(scene);
         let openRAction = openR.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                main.camAnim(new BABYLON.Vector3(1, 0, 15), new BABYLON.Vector3(0, 0, 0), 0.75);
+                main.camAnim(1, 0, 15, new BABYLON.Vector3(0, 0, 0), 0.75);
                 for (let i = 0; i < container.animationGroups.length; i++) {
                         container.animationGroups[i].play();
                 }
-                hl.removeMesh(scene.getMeshById("GEO.Belgium.L"));
-                hl.removeMesh(scene.getMeshById("GEO.Belgium.R"));
+                hlB.removeMesh(scene.getMeshById("GEO.Belgium.L"));
+                hlB.removeMesh(scene.getMeshById("GEO.Belgium.R"));
                 openL.actionManager.unregisterAction(openLAction);
                 openR.actionManager.unregisterAction(openRAction);
         }));
 
         // EVT: Parties
         let pdva = scene.getMeshById("EVT.PVDA");
-        hl.addMesh(pdva, BABYLON.Color3.Yellow());
+        hlB.addMesh(pdva, BABYLON.Color3.White());
         pdva.actionManager = new BABYLON.ActionManager(scene);
-        pdva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.8, 0.75, 0.15), 0.5);
+        pdva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(-0.95, 0.6, 0), 0.5);
                 dialogPop("PVDA");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(pdva);
+                hlB.removeMesh(pdva);
         }));
 
         let groen = scene.getMeshById("EVT.Groen");
-        hl.addMesh(groen, BABYLON.Color3.Yellow())
+        hlB.addMesh(groen, BABYLON.Color3.White())
         groen.actionManager = new BABYLON.ActionManager(scene);
         groen.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.55, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(-0.675, 0.6, 0), 0.5);
                 dialogPop("Groen");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(groen);
+                hlB.removeMesh(groen);
         }))
 
         let vooruit = scene.getMeshById("EVT.Vooruit");
-        hl.addMesh(vooruit, BABYLON.Color3.Yellow())
+        hlB.addMesh(vooruit, BABYLON.Color3.White())
         vooruit.actionManager = new BABYLON.ActionManager(scene);
         vooruit.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(-0.275, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(-0.325, 0.6, 0), 0.5);
                 dialogPop("Vooruit");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(vooruit);
+                hlB.removeMesh(vooruit);
         }))
 
         let cdnv = scene.getMeshById("EVT.CDNV");
-        hl.addMesh(cdnv, BABYLON.Color3.Yellow())
+        hlB.addMesh(cdnv, BABYLON.Color3.White())
         cdnv.actionManager = new BABYLON.ActionManager(scene);
         cdnv.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(0, 0.6, 0), 0.5);
                 dialogPop("CD&V");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(cdnv);
+                hlB.removeMesh(cdnv);
         }))
 
         let vld = scene.getMeshById("EVT.VLD");
-        hl.addMesh(vld, BABYLON.Color3.Yellow())
+        hlB.addMesh(vld, BABYLON.Color3.White())
         vld.actionManager = new BABYLON.ActionManager(scene);
         vld.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.275, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(0.325, 0.6, 0), 0.5);;
                 dialogPop("Open VLD");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(vld);
+                hlB.removeMesh(vld);
         }))
 
         let nva = scene.getMeshById("EVT.NVA");
-        hl.addMesh(nva, BABYLON.Color3.Yellow())
+        hlB.addMesh(nva, BABYLON.Color3.White())
         nva.actionManager = new BABYLON.ActionManager(scene);
         nva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.55, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(0.675, 0.6, 0), 0.5);
                 dialogPop("NVA");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(nva);
+                hlB.removeMesh(nva);
         }))
 
         let vlb = scene.getMeshById("EVT.VLB");
-        hl.addMesh(vlb, BABYLON.Color3.Yellow())
+        hlB.addMesh(vlb, BABYLON.Color3.White())
         vlb.actionManager = new BABYLON.ActionManager(scene);
         vlb.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
-                camAnim(new BABYLON.Vector3(-0.5, 0.5, 5), new BABYLON.Vector3(0.8, 0.75, 0.15), 0.5);
+                camAnim(Math.PI/2, 0.65, 5, new BABYLON.Vector3(0.95, 0.6, 0), 0.5);
                 dialogPop("Vlaams Belang");
                 document.getElementById("dialogButton").style.display = 'none';
-                hl.removeMesh(vlb);
+                hlB.removeMesh(vlb);
         }))
 
     });

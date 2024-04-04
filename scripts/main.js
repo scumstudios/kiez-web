@@ -18,7 +18,8 @@ export const camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.75, 10, new 
 
 export let sg
 export let vcolmat
-export let hl
+export let hlB
+export let hlS
 
 // Dialog Interaction Function
 export function dialogPop(text, link, link_url) {
@@ -32,20 +33,50 @@ export function dialogPop(text, link, link_url) {
 
 }
 
-export function camAnim(pos, lookAt, duration) {
+export function camAnim(alpha, beta, radius, target, duration) {
 
     const animations = [
         // move the camera position
-        animMove(camera, pos),
+        animAlpha(camera, alpha),
+        animBeta(camera, beta),
+        animRadius(camera, radius),
         // move the camera target
-        animLookAt(camera, lookAt),
+        animTarget(camera, target)
     ];
 
-    function animMove(camera, pos) {
-        const anim = new BABYLON.Animation('movecam', 'position', 1, BABYLON.Animation.ANIMATIONTYPE_VECTOR3);
+    function animAlpha(camera, a) {
+        const anim = new BABYLON.Animation('camA', 'alpha', 1, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
         anim.setKeys([
-            {frame: 0, value: camera.position.clone()},
-            {frame: duration, value: pos},
+            {frame: 0, value: camera.alpha},
+            {frame: duration, value: a},
+        ]);
+
+        // easing
+        const easingFun = new BABYLON.SineEase();
+        easingFun.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUT);
+        anim.setEasingFunction(easingFun);
+        return anim;
+    }
+
+    function animBeta(camera, b) {
+        const anim = new BABYLON.Animation('camB', 'beta', 1, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+        anim.setKeys([
+            {frame: 0, value: camera.beta},
+            {frame: duration, value: b},
+        ]);
+
+        // easing
+        const easingFun = new BABYLON.SineEase();
+        easingFun.setEasingMode(BABYLON.EasingFunction.EASINGMODE_EASEOUT);
+        anim.setEasingFunction(easingFun);
+        return anim;
+    }
+
+    function animRadius(camera, r) {
+        const anim = new BABYLON.Animation('camR', 'radius', 1, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
+        anim.setKeys([
+            {frame: 0, value: camera.radius},
+            {frame: duration, value: r},
         ]);
 
         // easing
@@ -55,11 +86,11 @@ export function camAnim(pos, lookAt, duration) {
         return anim;
     }
   
-  function animLookAt(camera, lookAt) {
-        const anim = new BABYLON.Animation('lookcam', 'target', 1, BABYLON.Animation.ANIMATIONTYPE_VECTOR3);
+  function animTarget(camera, target) {
+        const anim = new BABYLON.Animation('camT', 'target', 1, BABYLON.Animation.ANIMATIONTYPE_VECTOR3);
         anim.setKeys([
             {frame: 0, value: camera.target.clone()},
-            {frame: duration, value: lookAt},
+            {frame: duration, value: target},
         ]);
 
         // easing 
@@ -96,13 +127,15 @@ export function loadScene(extScene) {
     camera.wheelPrecision = 50;
     camera.lowerRadiusLimit = 3.5;
     camera.upperRadiusLimit = 15;
-    camera.lowerBetaLimit = 0.75;
-    camera.upperBetaLimit = 0.75;
+    camera.lowerBetaLimit = 0.65;
+    camera.upperBetaLimit = 1.5;
 
     // Lighting Setup
     const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(-0.75, -1, -0.5), scene);
     sun.intensity = 1;
-    sun.autoCalcShadowZBounds = true;
+    sun.autoCalcShadowZBounds = false;
+    sun.shadowMinZ = -1;
+    sun.shadowMaxZ = 2.5;
 
     // Shadows
     sg = new BABYLON.ShadowGenerator(1024, sun);
@@ -120,9 +153,13 @@ export function loadScene(extScene) {
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
     
     // Hightlight Layer
-    hl = new BABYLON.HighlightLayer("hl", scene);
-    hl.blurHorizontalSize = 0.33;
-    hl.blurVerticalSize = 0.33;
+    hlB = new BABYLON.HighlightLayer("hlB", scene);
+    hlB.blurHorizontalSize = 1;
+    hlB.blurVerticalSize = 1;
+
+    hlS = new BABYLON.HighlightLayer("hlS", scene);
+    hlS.blurHorizontalSize = 0.5;
+    hlS.blurVerticalSize = 0.5;
 
     extScene();
 
