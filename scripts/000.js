@@ -23,9 +23,7 @@ export default function sc000(engine) {
         container.addAllToScene();
         scene.stopAllAnimations();
         
-        console.log(main.camera.alpha)
         main.camAnim(1.57, 1.3, 6, "TGT.Info", 0.75);
-        console.log(main.camera.alpha)
 
         container.animationGroups[0].play();
         container.animationGroups[0].loopAnimation = true;

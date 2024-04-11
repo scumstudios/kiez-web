@@ -67,7 +67,7 @@ export function sc040(engine) {
         local.actionManager = new BABYLON.ActionManager(scene);
         local.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
             camAnim(-2.35, 0.65, 1, "TGT.Local", 0.75);
-            dialogPop("Provincie- en gemeenteraadsverkiezingen:", "Op 13 oktober stem je ook voor het Federaal Parlement en De kamer. Hier wordt er beslist rond zaken als jeugd, evenementen in jouw gemeente, onderhoud en aanleg van parken, OCMW, mobiliteit, etc. Hier moet je ook gaan stemmen vanaf je 16de!", false);
+            dialogPop("Provincie- en gemeenteraadsverkiezingen:", "Op 13 oktober stem je voor je provincie en gemeenteraad. Hier wordt er beslist rond zaken als jeugd, evenementen in jouw gemeente, onderhoud en aanleg van parken, OCMW, mobiliteit, etc. Hier moet je ook gaan stemmen vanaf je 16de!", false);
             hlB.removeMesh(local);
             hlS.addMesh(local, BABYLON.Color3.Yellow());
         }));
