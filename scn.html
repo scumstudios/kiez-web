@@ -47,11 +47,8 @@
             </div>
         </div>        
 
-         <!-- Dialog Frame -->
-         <div id="dialogFrame">
-            <div id="dialogTitle">
-                Lorem Ipsum
-            </div>
+        <!-- Dialog Frame -->
+        <div id="dialogFrame">
             <div id="dialogText">
                 Lorem Ipsum
             </div>
@@ -71,12 +68,18 @@
 
         <!-- BabulonJS rendering -->
         <canvas id="renderCanvas"></canvas>
-        <script type="module" src="../scripts/main.js"></script>
-        <script type="module">
-            import { loadScene } from "../scripts/main.js"
-            import { sc010 } from '../scripts/010.js';
 
-            loadScene(sc010);
+        <script type="module">
+
+            const scenePath = "./scripts/" + window.location.search.substr(1).slice(2) + ".js";
+            console.log(scenePath);
+
+            import { loadScene } from "./scripts/main.js";
+            // import { buildScene } from "./scripts/010.js";
+            import { buildScene } from scenePath;
+
+            loadScene(buildScene);
+
         </script>
 
 

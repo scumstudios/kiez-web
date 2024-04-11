@@ -22,11 +22,17 @@ export let hlB
 export let hlS
 
 // Dialog Interaction Function
-export function dialogPop(text, link, link_url) {
-
+export function dialogPop(title, text, link, link_url) {
     document.getElementById("dialogFrame").style.display = 'grid';
+    document.getElementById("dialogTitle").textContent = title;
     document.getElementById("dialogText").textContent = text;
-    document.getElementById("dialogButton").style.display = "inline"
+    if(link) {
+        document.getElementById("dialogButton").style.display = "inline"
+    }
+    else {
+        document.getElementById("dialogButton").style.display = "none"
+    }
+    
     document.getElementById("dialogButton").addEventListener("click", function() {
         window.location.href = link_url;
     });
@@ -125,6 +131,7 @@ export function loadScene(extScene) {
     camera.angularSensibilityX = 512;
     camera.angularSensibilityY = 512;
     camera.wheelPrecision = 50;
+    camera.useNaturalPinchZoom = true;
     camera.lowerRadiusLimit = 3.5;
     camera.upperRadiusLimit = 15;
     camera.lowerBetaLimit = 0.65;
@@ -154,19 +161,19 @@ export function loadScene(extScene) {
     
     // Hightlight Layer
     hlB = new BABYLON.HighlightLayer("hlB", scene);
-    hlB.blurHorizontalSize = 1;
-    hlB.blurVerticalSize = 1;
+    hlB.blurHorizontalSize = 0.65;
+    hlB.blurVerticalSize = 0.65;
 
     hlS = new BABYLON.HighlightLayer("hlS", scene);
-    hlS.blurHorizontalSize = 0.5;
-    hlS.blurVerticalSize = 0.5;
+    hlS.blurHorizontalSize = 0.333;
+    hlS.blurVerticalSize = 0.333;
 
     extScene();
 
-    engine.setHardwareScalingLevel(0.75);
+    engine.setHardwareScalingLevel(1);
 
     var options = new BABYLON.SceneOptimizerOptions();
-    options.addOptimization(new BABYLON.HardwareScalingOptimization(0.75, 1.5));
+    options.addOptimization(new BABYLON.HardwareScalingOptimization(1, 1.5));
 
     // Optimizer
     var optimizer = new BABYLON.SceneOptimizer(scene, options);
