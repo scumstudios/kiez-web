@@ -24,7 +24,7 @@ export default function sc000(engine) {
         scene.stopAllAnimations();
         
         console.log(main.camera.alpha)
-        main.camAnim(1.57, 1.3, 6, new BABYLON.Vector3(0, 0.6, 0), 0.75);
+        main.camAnim(1.57, 1.3, 6, "TGT.Info", 0.75);
         console.log(main.camera.alpha)
 
         container.animationGroups[0].play();
@@ -72,7 +72,7 @@ export default function sc000(engine) {
             }
             }
 
-            main.camAnim(1.57, 0.65, 10, new BABYLON.Vector3(0, 0, 0), 1.5);
+            main.camAnim(1.57, 0.65, 10, "TGT.Zero", 1.5);
             playAnimations();
 
             hlB.removeMesh(evt_info);

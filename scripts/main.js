@@ -28,15 +28,13 @@ export function dialogPop(title, text, link, link_url) {
     document.getElementById("dialogText").textContent = text;
     if(link) {
         document.getElementById("dialogButton").style.display = "inline"
+        document.getElementById("dialogButton").addEventListener("click", function() {
+            window.location.href = link_url;
+        });
     }
     else {
         document.getElementById("dialogButton").style.display = "none"
     }
-    
-    document.getElementById("dialogButton").addEventListener("click", function() {
-        window.location.href = link_url;
-    });
-
 }
 
 export function camAnim(alpha, beta, radius, target, duration) {
@@ -93,10 +91,11 @@ export function camAnim(alpha, beta, radius, target, duration) {
     }
   
   function animTarget(camera, target) {
+        const tgt = scene.getTransformNodeByID(target).position.clone()
         const anim = new BABYLON.Animation('camT', 'target', 1, BABYLON.Animation.ANIMATIONTYPE_VECTOR3);
         anim.setKeys([
             {frame: 0, value: camera.target.clone()},
-            {frame: duration, value: target},
+            {frame: duration, value: tgt},
         ]);
 
         // easing 
@@ -136,13 +135,14 @@ export function loadScene(extScene) {
     camera.upperRadiusLimit = 15;
     camera.lowerBetaLimit = 0.65;
     camera.upperBetaLimit = 1.5;
+    camera.minZ = 0.25;
 
     // Lighting Setup
     const sun = new BABYLON.DirectionalLight("Sun", new BABYLON.Vector3(-0.75, -1, -0.5), scene);
     sun.intensity = 1;
     sun.autoCalcShadowZBounds = false;
     sun.shadowMinZ = -1;
-    sun.shadowMaxZ = 2.5;
+    sun.shadowMaxZ = 3;
 
     // Shadows
     sg = new BABYLON.ShadowGenerator(1024, sun);

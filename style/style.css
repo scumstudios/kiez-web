@@ -215,7 +215,7 @@ a {
     grid-column: span 4;
     padding: 0.25em 0.75em;
     box-sizing: border-box;
-    width: auto;
+    width: 100%;
     font-family: bobby, Arial, Helvetica, sans-serif;
     font-size: 1.5em;
     color: var(--black);
@@ -229,8 +229,8 @@ a {
     padding: 0.75em;
     box-sizing: border-box;
     width: 100%;
-    font-family: os-regular, Arial, Helvetica, sans-serif;
-    font-size: 1.1em;
+    font-family: os-light, Arial, Helvetica, sans-serif;
+    font-size: 1em;
     color: var(--white);
     border-style: solid;
     border-width: 2px;
