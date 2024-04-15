@@ -74,7 +74,6 @@
         <script type="module">
             
             const sceneFile = "./scripts/" + window.location.search.substr(1).slice(2) + ".js";
-            console.log(sceneFile)
 
             import { loadScene } from "./scripts/main.js";
             import(sceneFile).then((module) => {

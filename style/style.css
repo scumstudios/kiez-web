@@ -313,7 +313,8 @@ a {
 #poweredContainer {
     position: absolute;
     bottom: 1em;
-    width: 320px;
+    width: 100%;
+    max-width: 320px;
     left: 50%;
     transform: translateX(-50%);
     /* background-color: #111111; */
@@ -338,6 +339,6 @@ a {
 }
 
 .poweredLogo {
-    height: 64px;
+    height: auto;
     width: auto;
 }
