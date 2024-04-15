@@ -84,7 +84,7 @@ export default function sc000(engine) {
         evt_lr.actionManager = new BABYLON.ActionManager(scene);
         evt_lr.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn/010.html");
+            main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
             hlB.removeMesh(evt_lr);
             hlS.addMesh(evt_lr, BABYLON.Color3.Yellow());
         }));
@@ -96,7 +96,7 @@ export default function sc000(engine) {
         evt_importance.actionManager = new BABYLON.ActionManager(scene);
         evt_importance.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beinvloed het onze samenleving?", true, "../scn/020.html");
+            main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beinvloed het onze samenleving?", true, "../scn.html?s=020");
             hlB.removeMesh(evt_importance);
             hlS.addMesh(evt_importance, BABYLON.Color3.Yellow());
         }));
@@ -108,7 +108,7 @@ export default function sc000(engine) {
         evt_howto.actionManager = new BABYLON.ActionManager(scene);
         evt_howto.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn/030.html");
+            main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
             hlB.removeMesh(evt_howto);
             hlS.addMesh(evt_howto, BABYLON.Color3.Yellow());
         }));
@@ -120,7 +120,7 @@ export default function sc000(engine) {
         evt_type.actionManager = new BABYLON.ActionManager(scene);
         evt_type.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Kieskringen", "Lokaal, Federaal, Europees... Wanneer stem je op wat en hoe zit dat allemaal in elkaar?", true, "../scn/040.html");
+            main.dialogPop("Kieskringen", "Lokaal, Federaal, Europees... Wanneer stem je op wat en hoe zit dat allemaal in elkaar?", true, "../scn.html?s=040");
             hlB.removeMesh(evt_type);
             hlS.addMesh(evt_type, BABYLON.Color3.Yellow());
         }));
@@ -132,7 +132,7 @@ export default function sc000(engine) {
         evt_post.actionManager = new BABYLON.ActionManager(scene);
         evt_post.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Na het stemmen", "Iedereen heeft gestemd, wat gebeurt er nu?", true, "../scn/050.html");
+            main.dialogPop("Na het stemmen", "Iedereen heeft gestemd, wat gebeurt er nu?", true, "../scn.html?s=050");
             hlB.removeMesh(evt_post);
             hlS.addMesh(evt_post, BABYLON.Color3.Yellow());
         }));

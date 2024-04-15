@@ -312,44 +312,32 @@ a {
 
 #poweredContainer {
     position: absolute;
-    bottom: 0;
-    width: 100%;
+    bottom: 1em;
+    width: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    /* background-color: #111111; */
+}
+
+#poweredText {
     font-family: bobby, Arial, Helvetica, sans-serif;
     font-size: 1.25em;
     color: var(--pink);
+    text-align: center;
+    padding-bottom: 1em;
 }
 
 #poweredLogos {
     display: grid;
-    width: 100%;
-    grid-template-columns: auto auto;
+    height: auto;
+    width: auto;
+    grid-template-columns: 1fr 2.3fr 1fr;
     justify-items: center;
     justify-content: center;
-    margin: 0 auto 0 auto;
+    gap: 2em;
 }
 
 .poweredLogo {
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    height: 7vh;
-    width: 7vh;
-    margin: 1em;
-}
-
-#logoScum {
-    background-image: url(../img/logo-scum.svg);
-}
-
-#logoGva {
-    background-image: url(../img/logo-gva.svg);
-}
-
-/* PARTICLE */
-
-#prt {
-    width: 16x;
-    height: 16px;
-    background-color: var(--yellow);
-    display: none;
+    height: 64px;
+    width: auto;
 }

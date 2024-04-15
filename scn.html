@@ -22,10 +22,9 @@
         <link rel="stylesheet" href="../style/style.css">
 
         <!-- Babylon Loaders -->
-        <script src="https://cdn.babylonjs.com/babylon.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-        <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="scripts/babylon.js"></script>
+        <script src="scripts/babylon.glTF2FileLoader.min.js"></script>
+        <script src="scripts/babylon.shadowOnlyMaterial.min.js"></script>
 
         <!-- Title -->
         <title>KIEZ.nu - Gen Z Kiest</title>
@@ -49,6 +48,9 @@
 
         <!-- Dialog Frame -->
         <div id="dialogFrame">
+            <div id="dialogTitle">
+                Lorem Ipsum
+            </div>
             <div id="dialogText">
                 Lorem Ipsum
             </div>
@@ -70,15 +72,17 @@
         <canvas id="renderCanvas"></canvas>
 
         <script type="module">
-
-            const scenePath = "./scripts/" + window.location.search.substr(1).slice(2) + ".js";
-            console.log(scenePath);
+            
+            const sceneFile = "./scripts/" + window.location.search.substr(1).slice(2) + ".js";
+            console.log(sceneFile)
 
             import { loadScene } from "./scripts/main.js";
-            // import { buildScene } from "./scripts/010.js";
-            import { buildScene } from scenePath;
-
-            loadScene(buildScene);
+            import(sceneFile).then((module) => {
+                const defaultMethod = module.default;
+                loadScene(defaultMethod);
+            }).catch((error) => {
+                console.error('Error importing scene file:', error);
+            });
 
         </script>
 

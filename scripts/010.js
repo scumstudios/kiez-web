@@ -2,7 +2,7 @@ import * as main from "./main.js";
 import { camAnim } from "./main.js";
 import { dialogPop } from "./main.js";
 
-export function sc010(engine) {
+export default function sc010(engine) {
     let scene = main.scene;
     let hlB = main.hlB;
     let hlS = main.hlS;

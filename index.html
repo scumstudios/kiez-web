@@ -22,10 +22,9 @@
         <link rel="stylesheet" href="style/style.css">
 
         <!-- Babylon Loaders -->
-        <script src="https://cdn.babylonjs.com/babylon.js"></script>
-        <script src="https://cdn.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
-        <script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
-        <script src="https://cdn.babylonjs.com/gui/babylon.gui.min.js"></script>
+        <script src="scripts/babylon.js"></script>
+        <script src="scripts/babylon.glTF2FileLoader.min.js"></script>
+        <script src="scripts/babylon.shadowOnlyMaterial.min.js"></script>
 
         <!-- Title -->
         <title>KIEZ.nu - Gen Z Kiest</title>
@@ -56,11 +55,12 @@
 
         <div id="poweredContainer">
             <div>
-                <p style="text-align: center;">POWERED BY</p>
+                <p id="poweredText">POWERED BY</p>
             </div>        
             <div id="poweredLogos">
-                <a href="https://www.scumstudios.be" target="_blank"><div class="poweredLogo" id="logoScum"></div></a>
-                <a href="https://www.gva.be" target="_blank"><div class="poweredLogo" id="logoGva"></div></a>
+                <a href="https://www.scumstudios.be" target="_blank"><img src="img/logo-scum.svg" alt="Scum Studios"></a>
+                <a href="https://www.vlaanderen.be/cjm" target="_blank"><img src="img/logo-flanders.svg" alt="Vlaanderen, Departement Cultuur, Jeugd en Media"></a>
+                <a href="https://www.gva.be" target="_blank"><img src="img/logo-gva-w.svg" alt="Gazet van Antwerpen"></a>
             </div>  
         </div>
 
