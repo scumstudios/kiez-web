@@ -86,7 +86,7 @@ export default function sc000(engine) {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
             hlB.removeMesh(evt_lr);
-            hlS.addMesh(evt_lr, BABYLON.Color3.Yellow());
+            // evt_lr.outlineColor = new BABYLON.Color3.Yellow();
         }));
 
 

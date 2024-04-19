@@ -22,11 +22,11 @@
         <link rel="stylesheet" href="style/style.css">
 
         <!-- Babylon Loaders -->
-        <script src="scripts/babylon.js"></script>
-        <script src="scripts/babylon.glTF2FileLoader.min.js"></script>
-        <script src="scripts/babylon.shadowOnlyMaterial.min.js"></script>
-        <script src="scripts/draco_decoder_gltf.js"></script>
-        <script src="scripts/draco_wasm_wrapper_gltf.js"></script>
+        <script src="scripts/babylon.js" defer></script>
+        <script src="scripts/babylon.glTF2FileLoader.min.js" defer></script>
+        <script src="scripts/babylon.shadowOnlyMaterial.min.js" defer></script>
+        <script src="scripts/draco_decoder_gltf.js" defer></script>
+        <script src="scripts/draco_wasm_wrapper_gltf.js" defer></script>
 
 
         <!-- Title -->
@@ -82,7 +82,7 @@
 
         <!-- BabylonJS rendering -->
         <canvas id="renderCanvas"></canvas>
-        <script type="module" src="./scripts/main.js"></script>
+        <script type="module" src="./scripts/main.js" defer></script>
         <script type="module">
             import { loadScene } from "./scripts/main.js"
             import sc000 from './scripts/000.js';
