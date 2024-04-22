@@ -65,6 +65,12 @@ export default function sc000(engine) {
 
             main.camAnim(1.57, 0.65, 10, "TGT.Zero", 1.5);
             playAnimations();
+            main.camera.useAutoRotationBehavior = true;
+            main.camera.idleRotationWatTime = 2500;
+            main.camera.idleRotationSpeed = 0.01;
+            main.camera.idleRotationSpinupTime = 3000;
+            main.camera.zoomStopsAnimation = true;
+
 
             main.setB(evt_info);
             evt_info.actionManager.unregisterAction(evtPop);
@@ -75,8 +81,10 @@ export default function sc000(engine) {
         let evt_lr = scene.getMeshById("EVT.Compass");
         evt_lr.actionManager = new BABYLON.ActionManager(scene);
         evt_lr.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
+            main.camAnim(4, 0.9, 10, "TGT.Zero", 1.25);
             main.setB(evt_lr);
         }));
 
@@ -85,8 +93,10 @@ export default function sc000(engine) {
         let evt_importance = scene.getMeshById("EVT.Parliament");
         evt_importance.actionManager = new BABYLON.ActionManager(scene);
         evt_importance.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beinvloed het onze samenleving?", true, "../scn.html?s=020");
+            main.camAnim(2.895, 0.9, 10, "TGT.Zero", 1.25);
             main.setB(evt_importance);
         }));
 
@@ -95,8 +105,10 @@ export default function sc000(engine) {
         let evt_howto = scene.getMeshById("EVT.Booth");
         evt_howto.actionManager = new BABYLON.ActionManager(scene);
         evt_howto.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
+            main.camAnim(1.57, 0.9, 10, "TGT.Zero", 1.25);
             main.setB(evt_howto);
         }));
 
@@ -105,8 +117,10 @@ export default function sc000(engine) {
         let evt_type = scene.getMeshById("EVT.Elections");
         evt_type.actionManager = new BABYLON.ActionManager(scene);
         evt_type.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Kieskringen", "Lokaal, Federaal, Europees... Wanneer stem je op wat en hoe zit dat allemaal in elkaar?", true, "../scn.html?s=040");
+            main.camAnim(5.5, 0.9, 10, "TGT.Zero", 1.25);
             main.setB(evt_type);
         }));
 
@@ -115,8 +129,10 @@ export default function sc000(engine) {
         let evt_post = scene.getMeshById("EVT.Finish");
         evt_post.actionManager = new BABYLON.ActionManager(scene);
         evt_post.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Na het stemmen", "Iedereen heeft gestemd, wat gebeurt er nu?", true, "../scn.html?s=050");
+            main.camAnim(0.25, 0.9, 10, "TGT.Zero", 1.25);
             main.setB(evt_post);
         }));
     });

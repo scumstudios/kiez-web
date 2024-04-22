@@ -47,6 +47,10 @@ export function camAnim(alpha, beta, radius, target, duration) {
     ];
 
     function animAlpha(camera, a) {
+        
+        camera.alpha = camera.alpha % (Math.PI*2);
+        if (camera.alpha < 0) camera.alpha += Math.PI*2;
+        
         const anim = new BABYLON.Animation('camA', 'alpha', 1, BABYLON.Animation.ANIMATIONTYPE_FLOAT);
         anim.setKeys([
             {frame: 0, value: camera.alpha},
@@ -123,14 +127,15 @@ export function setW(mesh) {
 
 export function loadScene(extScene) {
     
-    engine.displayLoadingUI();
-
-    scene.useRightHandedSystem = true;
-
     // scene.debugLayer.show();
 
+    engine.displayLoadingUI();
+    scene.useRightHandedSystem = true;
+    engine.setHardwareScalingLevel(0.75);
+
+
     // Create Ground Plane
-    const ground = BABYLON.MeshBuilder.CreateGround("GEO.Ground", {width:5, height:5}, scene);
+    const ground = BABYLON.MeshBuilder.CreateGround("GEO.Ground", {width:10, height:10}, scene);
     ground.material = new BABYLON.ShadowOnlyMaterial('MAT.ShadowCatcher', scene)
     ground.receiveShadows = true;
 
@@ -172,9 +177,16 @@ export function loadScene(extScene) {
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
     
-    extScene();
+    BABYLON.SceneLoader.ImportMesh("", "assets/", "instances.glb", scene, function (newMeshes) {
+        newMeshes.forEach(mesh => {
+            mesh.receiveShadows = true;
+            sg.addShadowCaster(mesh);
+            mesh.material = vcolmat;
+        });
+    });
 
-    engine.setHardwareScalingLevel(1);
+
+    extScene();
 
     var options = new BABYLON.SceneOptimizerOptions();
     options.addOptimization(new BABYLON.HardwareScalingOptimization(1, 1.5));
