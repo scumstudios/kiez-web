@@ -4,7 +4,6 @@ import { dialogPop } from "./main.js";
 
 export default function sc020(engine) {
     let scene = main.scene;
-    let hlB = main.hlB;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
 
@@ -17,8 +16,7 @@ export default function sc020(engine) {
             mesh.receiveShadows = true;
             sg.addShadowCaster(mesh, true);
             mesh.renderOutline = true;
-            mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-            mesh.outlineWidth = 0.005;
+            main.setB(mesh);
         });
 
     container.addAllToScene();
@@ -29,11 +27,10 @@ export default function sc020(engine) {
         reset.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
                 camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.5);
                 document.getElementById("dialogFrame").style.display = 'none';
-                hlB.removeMesh(reset);
     }));
 
     let employment = scene.getMeshById("EVT.Employment");
-    hlB.addMesh(employment, BABYLON.Color3.White());
+    main.setW(employment);
     employment.actionManager = new BABYLON.ActionManager(scene);
     employment.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
     camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.25);
@@ -43,7 +40,7 @@ export default function sc020(engine) {
         camAnim(2, 0.6, 3.5, "TGT.Employment", 0.75);
         dialogPop("Werkgelegenheid", "Invloed op werkgelegenheid", false);
         document.getElementById("dialogButton").style.display = 'none';
-        hlB.removeMesh(employment);
+        main.setY(employment);
     });
 
         employment.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
@@ -53,7 +50,7 @@ export default function sc020(engine) {
 
 
     let justice = scene.getMeshById("EVT.Justice");
-    hlB.addMesh(justice, BABYLON.Color3.White());
+    main.setW(justice);
     justice.actionManager = new BABYLON.ActionManager(scene);
     justice.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
     camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.25);
@@ -62,7 +59,7 @@ export default function sc020(engine) {
     justiceAnimation.onAnimationEndObservable.add(() => {
         camAnim(2, 0.6, 3.5, "TGT.Justice", 0.75);
         dialogPop("Justitie", "Invloed op justitie", false);
-        hlB.removeMesh(justice);
+        main.setY(justice);
     });
 
         justice.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
@@ -71,7 +68,7 @@ export default function sc020(engine) {
     }));
 
     let education = scene.getMeshById("EVT.Education");
-    hlB.addMesh(education, BABYLON.Color3.White());
+    main.setW(education);
     education.actionManager = new BABYLON.ActionManager(scene);
     education.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
     camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.25);
@@ -80,7 +77,7 @@ export default function sc020(engine) {
     educationAnimation.onAnimationEndObservable.add(() => {
         camAnim(2, 0.6, 3.5, "TGT.Education", 0.75);
         dialogPop("Educatie", "Invloed op educatie", false);
-        hlB.removeMesh(education);
+        main.setY(education);
     });
 
         education.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
@@ -89,7 +86,7 @@ export default function sc020(engine) {
     }));
 
     let care = scene.getMeshById("EVT.Care");
-    hlB.addMesh(care, BABYLON.Color3.White());
+    main.setW(care);
     care.actionManager = new BABYLON.ActionManager(scene);
     care.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
     camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.25);
@@ -98,7 +95,7 @@ export default function sc020(engine) {
     careAnimation.onAnimationEndObservable.add(() => {
         camAnim(2, 0.6, 3.5, "TGT.Care", 0.75);
         dialogPop("Sociale Welvaart", "Invloed op sociale welva", false);
-        hlB.removeMesh(care);
+        main.setY(care);
     });
 
         care.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
@@ -107,7 +104,7 @@ export default function sc020(engine) {
     }));
 
     let environment = scene.getMeshById("EVT.Environment");
-    hlB.addMesh(environment, BABYLON.Color3.White());
+    main.setW(environment);
     environment.actionManager = new BABYLON.ActionManager(scene);
     environment.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
     camAnim(Math.PI/2, 0.5, 7.5, "TGT.Reset", 0.25);
@@ -116,7 +113,7 @@ export default function sc020(engine) {
     environmentAnimation.onAnimationEndObservable.add(() => {
         camAnim(2, 0.6, 3.5, "TGT.Environment", 0.75);
         dialogPop("Sociale Welvaart", "Invloed op sociale welva", false);
-        hlB.removeMesh(environment);
+        main.setY(environment);
     });
 
         environment.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {

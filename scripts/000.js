@@ -4,11 +4,7 @@ export default function sc000(engine) {
     let scene = main.scene;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
-    let hlB = main.hlB;
-    let hlS = main.hlS;
 
-
-    
     // LOAD ASSETS
     BABYLON.SceneLoader.LoadAssetContainer("assets/", "000-start.glb", scene, function(container) {
         container.meshes.forEach(mesh => {
@@ -16,8 +12,7 @@ export default function sc000(engine) {
             mesh.receiveShadows = true;
             sg.addShadowCaster(mesh, true);
             mesh.renderOutline = true;
-            mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-            mesh.outlineWidth = 0.005;
+            main.setW(mesh);
         });
 
         container.addAllToScene();
@@ -50,8 +45,6 @@ export default function sc000(engine) {
 
         prtStart.start();
 
-
-        hlB.addMesh(evt_info, BABYLON.Color3.White());
         evt_info.actionManager = new BABYLON.ActionManager(scene);
         let evtPop = evt_info.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
@@ -73,68 +66,58 @@ export default function sc000(engine) {
             main.camAnim(1.57, 0.65, 10, "TGT.Zero", 1.5);
             playAnimations();
 
-            hlB.removeMesh(evt_info);
+            main.setB(evt_info);
             evt_info.actionManager.unregisterAction(evtPop);
         }));
 
 
         // L&R - SC010
         let evt_lr = scene.getMeshById("EVT.Compass");
-        hlB.addMesh(evt_lr, BABYLON.Color3.White());
         evt_lr.actionManager = new BABYLON.ActionManager(scene);
         evt_lr.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
-            hlB.removeMesh(evt_lr);
-            // evt_lr.outlineColor = new BABYLON.Color3.Yellow();
+            main.setB(evt_lr);
         }));
 
 
         // IMPORTANCE OF POLITICS - SC020
         let evt_importance = scene.getMeshById("EVT.Parliament");
-        hlB.addMesh(evt_importance, BABYLON.Color3.White());
         evt_importance.actionManager = new BABYLON.ActionManager(scene);
         evt_importance.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beinvloed het onze samenleving?", true, "../scn.html?s=020");
-            hlB.removeMesh(evt_importance);
-            hlS.addMesh(evt_importance, BABYLON.Color3.Yellow());
+            main.setB(evt_importance);
         }));
 
 
         // PRACTICAL VOTING - SC030
         let evt_howto = scene.getMeshById("EVT.Booth");
-        hlB.addMesh(evt_howto, BABYLON.Color3.White());
         evt_howto.actionManager = new BABYLON.ActionManager(scene);
         evt_howto.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
-            hlB.removeMesh(evt_howto);
-            hlS.addMesh(evt_howto, BABYLON.Color3.Yellow());
+            main.setB(evt_howto);
         }));
 
 
         // ELECTION TYPES - SC040
         let evt_type = scene.getMeshById("EVT.Elections");
-        hlB.addMesh(evt_type, BABYLON.Color3.White());
         evt_type.actionManager = new BABYLON.ActionManager(scene);
         evt_type.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Kieskringen", "Lokaal, Federaal, Europees... Wanneer stem je op wat en hoe zit dat allemaal in elkaar?", true, "../scn.html?s=040");
-            hlB.removeMesh(evt_type);
-            hlS.addMesh(evt_type, BABYLON.Color3.Yellow());
+            main.setB(evt_type);
         }));
 
 
         // POST-ELECTION - SC050
         let evt_post = scene.getMeshById("EVT.Finish");
-        hlB.addMesh(evt_post, BABYLON.Color3.White());
         evt_post.actionManager = new BABYLON.ActionManager(scene);
         evt_post.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Na het stemmen", "Iedereen heeft gestemd, wat gebeurt er nu?", true, "../scn.html?s=050");
-            hlB.removeMesh(evt_post);
-            hlS.addMesh(evt_post, BABYLON.Color3.Yellow());
+            main.setB(evt_post);
         }));
     });
   };

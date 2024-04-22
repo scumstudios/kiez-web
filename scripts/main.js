@@ -18,8 +18,6 @@ export const camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.75, 10, new 
 
 export let sg
 export let vcolmat
-export let hlB
-export let hlS
 
 // Dialog Interaction Function
 export function dialogPop(title, text, link, link_url) {
@@ -108,6 +106,21 @@ export function camAnim(alpha, beta, radius, target, duration) {
     scene.beginDirectAnimation(camera, animations, 0, 2, false);
 };
 
+export function setB(mesh) {
+    mesh.outlineColor = new BABYLON.Color3.Black();
+    mesh.outlineWidth = 0.005;
+}
+
+export function setY(mesh) {
+    mesh.outlineColor = new BABYLON.Color3.Yellow();
+    mesh.outlineWidth = 0.01;
+}
+
+export function setW(mesh) {
+    mesh.outlineColor = new BABYLON.Color3.White();
+    mesh.outlineWidth = 0.01;
+}
+
 export function loadScene(extScene) {
     
     engine.displayLoadingUI();
@@ -159,15 +172,6 @@ export function loadScene(extScene) {
     //Background Color
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
     
-    // Hightlight Layer
-    hlB = new BABYLON.HighlightLayer("hlB", scene);
-    hlB.blurHorizontalSize = 0.65;
-    hlB.blurVerticalSize = 0.65;
-
-    hlS = new BABYLON.HighlightLayer("hlS", scene);
-    hlS.blurHorizontalSize = 0.333;
-    hlS.blurVerticalSize = 0.333;
-
     extScene();
 
     engine.setHardwareScalingLevel(1);

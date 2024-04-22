@@ -4,7 +4,6 @@ import { dialogPop } from "./main.js";
 
 export default function sc030(engine) {
     let scene = main.scene;
-    let hlB = main.hlB;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
 
@@ -15,8 +14,7 @@ export default function sc030(engine) {
             mesh.receiveShadows = true;
             sg.addShadowCaster(mesh, true);
             mesh.renderOutline = true;
-            mesh.outlineColor = new BABYLON.Color3(0, 0, 0);
-            mesh.outlineWidth = 0.005;
+            main.setB(mesh);
         });
 
     container.addAllToScene();
