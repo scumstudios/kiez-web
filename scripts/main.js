@@ -131,7 +131,7 @@ export function loadScene(extScene) {
 
     engine.displayLoadingUI();
     scene.useRightHandedSystem = true;
-    engine.setHardwareScalingLevel(0.75);
+    engine.setHardwareScalingLevel(1);
 
 
     // Create Ground Plane
