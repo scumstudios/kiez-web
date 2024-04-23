@@ -22,17 +22,19 @@ export default function sc040(engine) {
         container.addAllToScene();
 
         main.camera.lowerRadiusLimit = 1;
-    
-        camAnim(Math.PI/2, 0.65, 7.5, "TGT.Start", 1);
+        main.camera.lowerBetaLimit = 0.5;
+        main.camera.alpha = 5.5;
+        camAnim(5.5, 0.65, 12.5, "TGT.Start", 1);
         
         // EVT: Europe
         let europe = scene.getMeshById("EVT.Europe");
         main.setW(europe);
         europe.actionManager = new BABYLON.ActionManager(scene);
         europe.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-            camAnim(2.225, 0.65, 4, "TGT.Europe", 0.75);
+            camAnim(6.282, 0.65, 7.5, "TGT.Europe", 0.75);
             dialogPop("Europees Parlement", "Op 9 juni stem je voor het Europees parlement. Hier wordt er beslist rond zaken als wetgeving, internationale overeenkomsten, controle en toezicht, etc. Hier moet je ook gaan stemmen vanaf je 16de!", false);
             main.setY(europe);
+            main.prtHighlight(europe, 50);
         }));
 
         // EVT: Federal
@@ -40,9 +42,10 @@ export default function sc040(engine) {
         main.setW(federal);
         federal.actionManager = new BABYLON.ActionManager(scene);
         federal.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-            camAnim(0.75, 0.65, 3, "TGT.Federal", 0.75);
+            camAnim(4.65, 0.65, 5.5, "TGT.Federal", 0.75);
             dialogPop("Federaal Parlement & De Kamer", "Op 9 juni stem je ook voor het Federaal Parlement en De kamer. Hier wordt er beslist rond zaken als buitenlandse zaken, defensie, migratie en asiel, etc.", false);
             main.setY(federal);
+            main.prtHighlight(federal, 35, 0.011);
         }));
 
         // EVT: Flanders
@@ -50,9 +53,10 @@ export default function sc040(engine) {
         main.setW(flanders);
         flanders.actionManager = new BABYLON.ActionManager(scene);
         flanders.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-            camAnim(5.55, 0.65, 2, "TGT.Flanders", 0.75);
+            camAnim(Math.PI, 0.65, 4, "TGT.Flanders", 0.75);
             dialogPop("Het Vlaams Parlement", "Op 9 juni stem je ook voor het Vlaams en Brussels Parlement. Hier wordt er beslist rond zaken als cultuur, onderwijs, mobiliteit, sport, etc.", false);
             main.setY(flanders);
+            main.prtHighlight(flanders, 25, 0.0075);
         }));
 
         // EVT: Local
@@ -60,9 +64,10 @@ export default function sc040(engine) {
         main.setW(local);
         local.actionManager = new BABYLON.ActionManager(scene);
         local.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-            camAnim(3.9275, 0.65, 1, "TGT.Local", 0.75);
+            camAnim(1.6, 0.65, 2, "TGT.Local", 0.75);
             dialogPop("Provincie- en gemeenteraadsverkiezingen:", "Op 13 oktober stem je voor je provincie en gemeenteraad. Hier wordt er beslist rond zaken als jeugd, evenementen in jouw gemeente, onderhoud en aanleg van parken, OCMW, mobiliteit, etc. Hier moet je ook gaan stemmen vanaf je 16de!", false);
             main.setY(local);
+            main.prtHighlight(local, 25, 0.0035);
         }));
 
 

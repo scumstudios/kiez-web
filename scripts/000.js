@@ -4,6 +4,7 @@ export default function sc000(engine) {
     let scene = main.scene;
     let sg = main.sg;
     let vcolmat = main.vcolmat;
+    let currentMesh = "";
 
     // LOAD ASSETS
     BABYLON.SceneLoader.LoadAssetContainer("assets/", "000-start.glb", scene, function(container) {
@@ -12,7 +13,7 @@ export default function sc000(engine) {
             mesh.receiveShadows = true;
             sg.addShadowCaster(mesh, true);
             mesh.renderOutline = true;
-            main.setW(mesh);
+            main.setY(mesh);
         });
 
         container.addAllToScene();
@@ -44,11 +45,14 @@ export default function sc000(engine) {
         prtStart.gravity = new BABYLON.Vector3(0, 2, 0);
 
         prtStart.start();
+        
 
+        // BOX START
         evt_info.actionManager = new BABYLON.ActionManager(scene);
+        main.setW(evt_info);
         let evtPop = evt_info.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Kiez.nu", "Welkom bij Kiez! Wij helpen je geinformeerd stemmen door je in te lichten over hoe de Belgische politiek werkt. Kies het topic waar je meer over wil weten.");
+            main.dialogPop("Kiez.nu", "Welkom bij Kiez! Wij helpen je geïnformeerd stemmen door je in te lichten over hoe de Belgische politiek werkt. Kies het topic waar je meer over wil weten.");
             document.getElementById("dialogButton").style.display = 'none';
             prtStart.dispose(true, false);
             
@@ -83,9 +87,10 @@ export default function sc000(engine) {
         evt_lr.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Belgishe Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
-            main.camAnim(4, 0.9, 10, "TGT.Zero", 1.25);
+            main.dialogPop("Politieke Partijen", "Navigeer je door het politieke landschap, wat is links en rechts nu eigenlijk?", true, "../scn.html?s=010");
+            main.camAnim(4.03, 1, 7.5, "TGT.Zero", 1);
             main.setB(evt_lr);
+            main.prtHighlight(evt_lr);
         }));
 
 
@@ -95,9 +100,10 @@ export default function sc000(engine) {
         evt_importance.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beinvloed het onze samenleving?", true, "../scn.html?s=020");
-            main.camAnim(2.895, 0.9, 10, "TGT.Zero", 1.25);
-            main.setB(evt_importance);
+            main.dialogPop("Stemmen & Samenleving", "Waarom is stemmen zo belangrijk en hoe beïnvloedt het onze samenleving?", true, "../scn.html?s=020");
+            main.camAnim(2.8, 1, 7.5, "TGT.Zero", 1);
+            main.setB(evt_importance); 
+            main.prtHighlight(evt_importance);
         }));
 
 
@@ -108,8 +114,9 @@ export default function sc000(engine) {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
-            main.camAnim(1.57, 0.9, 10, "TGT.Zero", 1.25);
+            main.camAnim(1.575, 1, 7.5, "TGT.Zero", 1);
             main.setB(evt_howto);
+            main.prtHighlight(evt_howto);
         }));
 
 
@@ -119,9 +126,10 @@ export default function sc000(engine) {
         evt_type.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Kieskringen", "Lokaal, Federaal, Europees... Wanneer stem je op wat en hoe zit dat allemaal in elkaar?", true, "../scn.html?s=040");
-            main.camAnim(5.5, 0.9, 10, "TGT.Zero", 1.25);
+            main.dialogPop("Kieskringen", "Lokaal, federaal, Europees... Wanneer stem je voor wat en hoe zit dat allemaal in elkaar?", true, "../scn.html?s=040");
+            main.camAnim(5.355, 1, 7.5, "TGT.Zero", 1);
             main.setB(evt_type);
+            main.prtHighlight(evt_type);
         }));
 
 
@@ -132,8 +140,9 @@ export default function sc000(engine) {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
             main.dialogPop("Na het stemmen", "Iedereen heeft gestemd, wat gebeurt er nu?", true, "../scn.html?s=050");
-            main.camAnim(0.25, 0.9, 10, "TGT.Zero", 1.25);
+            main.camAnim(0.295, 1, 7.5, "TGT.Zero", 1);
             main.setB(evt_post);
+            main.prtHighlight(evt_post);
         }));
     });
   };

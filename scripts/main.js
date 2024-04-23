@@ -15,6 +15,7 @@ export const canvas = document.getElementById("renderCanvas");
 export const engine = new BABYLON.Engine(canvas, true, { stencil: true });
 export const scene = new BABYLON.Scene(engine);
 export const camera = new BABYLON.ArcRotateCamera("Camera", 1.57, 0.75, 10, new BABYLON.Vector3(0, 0, 0), scene);
+export const prtSel = new BABYLON.ParticleSystem("prtSelect", 100, scene);
 
 export let sg
 export let vcolmat
@@ -125,6 +126,31 @@ export function setW(mesh) {
     mesh.outlineWidth = 0.01;
 }
 
+export function prtHighlight(mesh, amount, size) {
+    prtSel.stop();
+    let bounds = mesh.getBoundingInfo();
+    prtSel.createCylinderEmitter(bounds.diagonalLength / Math.PI, 0, 1);
+    prtSel.emitter = mesh;
+
+    if (amount == null) {
+        prtSel.emitRate = 25;
+    }
+    else {
+        prtSel.emitRate = amount;
+    }
+
+    if (size == null) {
+        prtSel.minSize = 0.01;
+        prtSel.maxSize = 0.025;
+    }
+    else {
+        prtSel.minSize = size / 1.5;
+        prtSel.maxSize = size * 1.5;
+    }
+
+    prtSel.start();
+}
+
 export function loadScene(extScene) {
     
     // scene.debugLayer.show();
@@ -147,7 +173,7 @@ export function loadScene(extScene) {
     camera.panningSensibility = 0;
     camera.angularSensibilityX = 512;
     camera.angularSensibilityY = 512;
-    camera.wheelPrecision = 50;
+    camera.wheelPrecision = 10;
     camera.useNaturalPinchZoom = true;
     camera.lowerRadiusLimit = 3.5;
     camera.upperRadiusLimit = 15;
@@ -174,9 +200,17 @@ export function loadScene(extScene) {
     vcolmat.specularColor = new BABYLON.Color3(0, 0, 0);
     vcolmat.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3);
 
-    //Background Color
+    //BG COLOR
     scene.clearColor = new BABYLON.Color3(0.22, 0, 0.65);
-    
+
+    // SELECTION PARTICLES
+    prtSel.particleTexture = new BABYLON.Texture("img/prt.svg",);
+    prtSel.maxLifeTime = 1;
+    prtSel.minEmitPower = 0;
+    prtSel.maxEmitPower = 0;
+    prtSel.gravity = new BABYLON.Vector3(0, 1, 0);
+
+    // BG INSTANCES
     BABYLON.SceneLoader.ImportMesh("", "assets/", "instances.glb", scene, function (newMeshes) {
         newMeshes.forEach(mesh => {
             mesh.receiveShadows = true;

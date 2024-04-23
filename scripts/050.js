@@ -19,7 +19,7 @@ export default function sc050(engine) {
 
         container.addAllToScene();
 
-        camAnim(2.2, 1, 3.5, "TGT.Start", 0.75);
+        camAnim(0.5, 1, 3.5, "TGT.Start", 1.25);
         dialogPop("Na Het Stemmen", "Na Het Stemmen", false)
 
         // EVT: Steps
@@ -27,36 +27,40 @@ export default function sc050(engine) {
         main.setW(votes);
         votes.actionManager = new BABYLON.ActionManager(scene);
         votes.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-                camAnim(3.6, 0.9, 5, "TGT.Votes", 0.75);
+                camAnim(1.9, 0.9, 5, "TGT.Votes", 0.75);
                 dialogPop("Stemmen Tellen", "Stemmen Tellen", false);
                 main.setY(votes);
+                main.prtHighlight(votes);
         }));
 
         let formation = scene.getMeshById("EVT.Formation");
         main.setW(formation);
         formation.actionManager = new BABYLON.ActionManager(scene);
         formation.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-                camAnim(4.8, 0.9, 4.5, "TGT.Formation", 0.75);
+                camAnim(3.1, 0.9, 4.5, "TGT.Formation", 0.75);
                 dialogPop("Formatie", "Formatie", false);
                 main.setY(formation);
+                main.prtHighlight(formation);
         }));
 
         let government = scene.getMeshById("EVT.Government");
         main.setW(government);
         government.actionManager = new BABYLON.ActionManager(scene);
         government.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-                camAnim(6.6, 0.9, 4, "TGT.Government", 0.75);
+                camAnim(4.9, 0.9, 4, "TGT.Government", 0.75);
                 dialogPop("Regering", "Regering Samenstellen", false);
                 main.setY(government);
+                main.prtHighlight(government);
         }));
 
         let versus = scene.getMeshById("EVT.Versus");
         main.setW(versus);
         versus.actionManager = new BABYLON.ActionManager(scene);
         versus.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
-                camAnim(8.125, 0.95, 3.5, "TGT.Versus", 0.75);
+                camAnim(6.475, 0.95, 3.5, "TGT.Versus", 0.75);
                 dialogPop("Oppositie & Coalitie", "Oppositie & Coalitie", false);
                 main.setY(versus);
+                main.prtHighlight(versus);
         }));
         
     });
