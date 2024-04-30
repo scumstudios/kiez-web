@@ -126,11 +126,18 @@ export function setW(mesh) {
     mesh.outlineWidth = 0.01;
 }
 
-export function prtHighlight(mesh, amount, size) {
+export function prtHighlight(mesh, amount, size, radius) {
     prtSel.stop();
-    let bounds = mesh.getBoundingInfo();
-    prtSel.createCylinderEmitter(bounds.diagonalLength / Math.PI, 0, 1);
     prtSel.emitter = mesh;
+
+    if (!radius) {
+        let bounds = mesh.getBoundingInfo();
+        prtSel.createCylinderEmitter(bounds.diagonalLength / Math.PI, 0, 1);
+    }
+    else {
+        prtSel.createSphereEmitter(radius, 0, 1);
+    }
+    
 
     if (amount == null) {
         prtSel.emitRate = 25;
