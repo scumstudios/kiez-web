@@ -142,6 +142,7 @@ export default function sc030(engine) {
                                 scene.getAnimationGroupByName("ANIM.List.OUT").start(false);
                                 scene.getAnimationGroupByName("ANIM.List.OUT").onAnimationEndObservable.add(() => {
                                     
+                                    main.setW(ticketbox);
                                     scene.getAnimationGroupByName("ANIM.Ticketboxes.IN").start(false);
                                     scene.getAnimationGroupByName("ANIM.Ticketboxes.IN").onAnimationEndObservable.add(() => {
 
@@ -153,9 +154,8 @@ export default function sc030(engine) {
                                         scene.getAnimationGroupByName("ANIM.QR.IN").start(false);
                                         scene.getAnimationGroupByName("ANIM.QR.IN").onAnimationEndObservable.add(() => {
                                             scene.getAnimationGroupByName("ANIM.QR.LOOP").start(true);
-                                            
                                             main.prtHighlight(ticketbox);
-                                            main.setW(ticketbox);
+                                            
                                         });
 
                                         ticketbox.actionManager = new BABYLON.ActionManager(scene);
