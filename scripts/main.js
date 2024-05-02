@@ -1,4 +1,6 @@
 // Custom Loading UI
+BABYLON.Tools.ScriptBaseUrl = "scripts/";
+
 BABYLON.DefaultLoadingScreen.prototype.displayLoadingUI = function () {
     document.getElementById("loadFrame").style.display = "inline";
     return;

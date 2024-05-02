@@ -144,5 +144,14 @@ export default function sc000(engine) {
             main.setB(evt_post);
             main.prtHighlight(evt_post);
         }));
+
+        // CREDITS
+        let credits = scene.getMeshById("EVT.Credits");
+        credits.actionManager = new BABYLON.ActionManager(scene);
+        credits.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
+            main.camera.useAutoRotationBehavior = false;
+            document.getElementById("logoContainer").style.display = 'none';
+            main.dialogPop("CREDITS", "Design & Development: Midge Sinnaeve // 3D Artist: Adrian Wojda", false);
+        }));
     });
   };
