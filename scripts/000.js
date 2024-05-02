@@ -12,8 +12,11 @@ export default function sc000(engine) {
             mesh.material = vcolmat;
             mesh.receiveShadows = true;
             sg.addShadowCaster(mesh, true);
-            mesh.renderOutline = true;
-            main.setY(mesh);
+            if (mesh.name != "EVT.Credits") {
+                mesh.renderOutline = true;
+                main.setY(mesh);
+            }
+            
         });
 
         container.addAllToScene();
