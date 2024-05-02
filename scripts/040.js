@@ -20,6 +20,9 @@ export default function sc040(engine) {
         });
 
         container.addAllToScene();
+        for (let i = 0; i < container.animationGroups.length; i++) {
+            container.animationGroups[i].start(true);
+        }
 
         main.camera.lowerRadiusLimit = 1;
         main.camera.lowerBetaLimit = 0.5;

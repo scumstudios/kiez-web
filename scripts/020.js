@@ -21,6 +21,7 @@ export default function sc020(engine) {
 
     container.addAllToScene();
     scene.stopAllAnimations();
+    scene.getAnimationGroupByName("ANIM.Plane").start(true);
 
     // RESET
     let reset = scene.getMeshById("GEO.Static");

@@ -18,6 +18,9 @@ export default function sc050(engine) {
         });
 
         container.addAllToScene();
+        for (let i = 0; i < container.animationGroups.length; i++) {
+            container.animationGroups[i].start(true);
+        }
 
         camAnim(0.5, 1, 3.5, "TGT.Start", 1.25);
         dialogPop("Na Het Stemmen", "Na Het Stemmen", false)

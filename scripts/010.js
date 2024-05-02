@@ -19,6 +19,40 @@ export default function sc010(engine) {
 
         container.addAllToScene();
         scene.stopAllAnimations();
+
+        scene.getAnimationGroupByName("ANIM.Cloud.000").start(true);
+        scene.getAnimationGroupByName("ANIM.Cloud.001").start(true);
+        scene.getAnimationGroupByName("ANIM.Cloud.002").start(true);
+        scene.getAnimationGroupByName("ANIM.Cloud.003").start(true);
+        scene.getAnimationGroupByName("ANIM.Shark").start(true);
+
+        function openWide() {
+                scene.getAnimationGroupByName("ANIM.Boat").start(true);
+                scene.getAnimationGroupByName("GEO.Belgium.L").start(false);
+                scene.getAnimationGroupByName("GEO.Belgium.R").start(false);
+                scene.getAnimationGroupByName("GEO.Bridge").start(false);
+                scene.getAnimationGroupByName("ANIM.CDNV").start(false);
+                scene.getAnimationGroupByName("ANIM.Groen").start(false);
+                scene.getAnimationGroupByName("ANIM.NVA").start(false);
+                scene.getAnimationGroupByName("ANIM.PVDA").start(false);
+                scene.getAnimationGroupByName("ANIM.VLB").start(false);
+                scene.getAnimationGroupByName("ANIM.VLD").start(false);
+                scene.getAnimationGroupByName("ANIM.Vooruit").start(false);
+                scene.getAnimationGroupByName("EVT.CDNV").start(false);
+                scene.getAnimationGroupByName("EVT.Groen").start(false);
+                scene.getAnimationGroupByName("EVT.NVA").start(false);
+                scene.getAnimationGroupByName("EVT.PVDA").start(false);
+                scene.getAnimationGroupByName("EVT.VLB").start(false);
+                scene.getAnimationGroupByName("EVT.VLD").start(false);
+                scene.getAnimationGroupByName("EVT.Vooruit").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.CDNV").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.Groen").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.NVA").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.PVDA").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.VLB").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.VLD").start(false);
+                scene.getAnimationGroupByName("GEO.Flag.Vooruit").start(false);
+        }
       
         // EVT: Open Up
         let openL = scene.getMeshById("GEO.Belgium.L");
@@ -26,9 +60,7 @@ export default function sc010(engine) {
         openL.actionManager = new BABYLON.ActionManager(scene);
         let openLAction = openL.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 main.camAnim(1, 0, 10, "TGT.Zero", 0.75);
-                for (let i = 0; i < container.animationGroups.length; i++) {
-                        container.animationGroups[i].play();
-                }
+                openWide();
                 openL.actionManager.unregisterAction(openLAction);
                 openR.actionManager.unregisterAction(openRAction);
                 main.setB(openL);
@@ -40,9 +72,7 @@ export default function sc010(engine) {
         openR.actionManager = new BABYLON.ActionManager(scene);
         let openRAction = openR.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 main.camAnim(1, 0, 10, "TGT.Zero", 0.75);
-                for (let i = 0; i < container.animationGroups.length; i++) {
-                        container.animationGroups[i].play();
-                }
+                openWide();
                 openL.actionManager.unregisterAction(openLAction);
                 openR.actionManager.unregisterAction(openRAction);
                 main.setB(openL);
