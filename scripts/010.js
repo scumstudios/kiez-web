@@ -20,6 +20,9 @@ export default function sc010(engine) {
         container.addAllToScene();
         scene.stopAllAnimations();
 
+        main.camAnim(Math.PI/2, 1, 7.5, "TGT.Start", 0.75);
+        dialogPop("Links & Rechts", "LINKS-RECHTS is een opdeling om het politieke landschap begrijpelijk te maken. Partijen zijn natuurlijk complexer dan dat; op basis van hun standpunten zijn ze meer links of rechts georiënteerd. Links staat voor progressiviteit, solidariteit en inclusie. Denk dan aan partijen zoals PVDA, Groen en Vooruit. En rechts staat voor conservatisme, individuele vrijheid en traditiegericht beleid. Dit zijn dan partijen zoals N-VA en Vlaams Belang. De partijen Open Vld en CD&V plaatsen we in het centrum, omdat zij tussen links en rechts zitten.", false);
+
         scene.getAnimationGroupByName("ANIM.Cloud.000").start(true);
         scene.getAnimationGroupByName("ANIM.Cloud.001").start(true);
         scene.getAnimationGroupByName("ANIM.Cloud.002").start(true);
@@ -27,6 +30,7 @@ export default function sc010(engine) {
         scene.getAnimationGroupByName("ANIM.Shark").start(true);
 
         function openWide() {
+                document.getElementById("dialogFrame").style.display = 'none';
                 scene.getAnimationGroupByName("ANIM.Boat").start(true);
                 scene.getAnimationGroupByName("GEO.Belgium.L").start(false);
                 scene.getAnimationGroupByName("GEO.Belgium.R").start(false);
@@ -135,7 +139,7 @@ export default function sc010(engine) {
         nva.actionManager = new BABYLON.ActionManager(scene);
         nva.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 camAnim(Math.PI/2, 0.65, 5,"TGT.NVA", 0.5);
-                dialogPop("NVA", "Vlaams-nationalistisch en liberaal-conservatief: “Vlaanderen en Wallonië moeten meer onafhankelijk worden, migranten moeten Vlaamse normen en waarden leren en de belastingen moeten verlaagd worden om de economie te bevorderen.”", false);
+                dialogPop("N-VA", "Vlaams-nationalistisch en liberaal-conservatief: “Vlaanderen en Wallonië moeten meer onafhankelijk worden, migranten moeten Vlaamse normen en waarden leren en de belastingen moeten verlaagd worden om de economie te bevorderen.”", false);
                 main.setB(nva);
                 main.prtHighlight(nva);
         }));
