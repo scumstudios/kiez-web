@@ -79,7 +79,7 @@ export default function sc040(engine) {
         exclamation.actionManager = new BABYLON.ActionManager(scene);
         exclamation.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
             camAnim(0.25, 0.65, 2.5, "TGT.Exclamation", 0.75);
-            dialogPop("Moet je stemmen?", "Je bent verplicht om naar het stemhokje te gaan en iets in te vullen, maar het is aan jou of je ervoor kiest om een stem uit te brengen op een persoon of partij, of ervoor kiest om blanco te stemmen.!Let op als je gaat stemmen. Je kan niet zomaar op iedereen stemmen, check zeker wie in jouw kieskring opkomt...", false);
+            dialogPop("Moet je stemmen?", "Je bent verplicht om naar het stemhokje te gaan en iets in te vullen, maar het is aan jou of je ervoor kiest om een stem uit te brengen op een persoon of partij, of ervoor kiest om blanco te stemmen. Let op als je gaat stemmen! Je kan niet zomaar op iedereen stemmen, check zeker wie in jouw kieskring opkomt...", false);
             main.setY(exclamation);
             main.prtHighlight(exclamation, 25, 0.0035);
         }));
