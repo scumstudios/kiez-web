@@ -55,7 +55,7 @@ export default function sc000(engine) {
         main.setW(evt_info);
         let evtPop = evt_info.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Kiez.nu", "Welkom bij Kiez! Wij helpen je geïnformeerd stemmen door je in te lichten over hoe de Belgische politiek werkt. Kies het topic waar je meer over wil weten.");
+            main.dialogPop("Kiez.nu", "Welkom bij Kiez! Wij helpen je geïnformeerd te stemmen door je in te lichten over hoe de Belgische politiek werkt. Kies het topic waar je meer over wilt weten.");
             document.getElementById("dialogButton").style.display = 'none';
             prtStart.dispose(true, false);
             

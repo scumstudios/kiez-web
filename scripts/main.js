@@ -120,7 +120,7 @@ export function setB(mesh) {
 
 export function setY(mesh) {
     mesh.outlineColor = new BABYLON.Color3.Yellow();
-    mesh.outlineWidth = 0.01;
+    mesh.outlineWidth = 0.005;
 }
 
 export function setW(mesh) {

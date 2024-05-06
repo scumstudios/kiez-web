@@ -27,7 +27,7 @@ export default function sc030(engine) {
         main.setW(mailbox);
         camAnim(0.575, 1.3, 7.5, "TGT.Mailbox", 0.75);
 
-        dialogPop("SCENE START", "Lorem Ipsum", false);
+        dialogPop("Stemmen", "Jaja, gaan stemmen. Allemaal goed en wel, maar hoe moet dat nu? Klik hier door elke stap van hoe je nu zoiets doet.", false);
 
         mailbox.actionManager = new BABYLON.ActionManager(scene);
         let mailboxAction = mailbox.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
@@ -42,7 +42,7 @@ export default function sc030(engine) {
                 scene.getAnimationGroupByName("ANIM.Mail.Show").onAnimationEndObservable.add(() => {
                     main.prtHighlight(mail);
                     scene.getAnimationGroupByName("ANIM.Mail.LOOP").start(true);
-                    dialogPop("You've got mail!", "Brief in de bus", false);
+                    dialogPop("Stembrief", "Je ontvangt ten laatste 15 dagen voor de verkiezingen (via de post) een oproepingsbrief met daarin waar en wanneer je zal gaan stemmen.", false);
                 });
                 
                 camAnim(0, 1.3, 6, "TGT.Mail", 0.75);
@@ -65,14 +65,14 @@ export default function sc030(engine) {
                     scene.getAnimationGroupByName("ANIM.ID.IN").start(false);
                     scene.getAnimationGroupByName("ANIM.ID.IN").onAnimationEndObservable.add(() => {
                         main.prtHighlight(id);
-                        dialogPop("Counter", "Stembrief en eID afgeven", false);
+                        dialogPop("Gaan Stemmen", "Neem zeker je identiteitskaart en je oproepingsbrief mee naar het stembureau en geef hem af aan een medewerker. Je ontvangt dan je stemkaart.", false);
                 });    
                 
                 id.actionManager = new BABYLON.ActionManager(scene);
                 let idAction = id.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                     
                     // ID ACTION & SET VOTE TYPES
-                    dialogPop("PAPIER", "Stemmen op papier", false);
+                    dialogPop("Stemmen op Papier", "In West- en Oost-Vlaamse gemeenten wordt er vaak nog op papier gestemd. Ook in Wallonië zal je op papier moeten stemmen.", false);
 
                     main.prtSel.stop();
 
@@ -98,7 +98,7 @@ export default function sc030(engine) {
                     paper.actionManager = new BABYLON.ActionManager(scene);
                     let paperAction = paper.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
-                        dialogPop("ELECTRONISCH", "Electronisch stemmen", false);
+                        dialogPop("Elektronisch Stemmen", "In 157 gemeenten wordt er elektronisch gestemd. Als je in Antwerpen woont, zal je hoogtswaarschijnlijk elektronisch stemmen.", false);
 
                         main.setB(paper);
                         main.setY(electronic);
@@ -110,7 +110,7 @@ export default function sc030(engine) {
                         electronic.actionManager = new BABYLON.ActionManager(scene);
                         let electronicAction = electronic.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
-                            dialogPop("KIESLIJST", "Stem uitbrengen / kieslijst", false);
+                            dialogPop("De Kieslijst", "Dan krijg je een kieslijst, deze krijg je dan oftewel op het scherm voor je. Of je krijgt hem op papier. Hierop staan alle kandidaten van partijen waarop jij kan stemmen. ", false);
 
                             main.prtSel.stop();
                             main.setB(electronic);
@@ -131,7 +131,7 @@ export default function sc030(engine) {
                             list.actionManager = new BABYLON.ActionManager(scene);
                             let listAction = list.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
-                                dialogPop("REGISTRATIE", "Registreer je stem", false);
+                                dialogPop("Stem Rigistreren", "Wanneer je een keuze hebt aangeduid op je stembiljet, moet die natuurlijk nog geregistreerd worden. Dat kan enerzijds gebeuren door je stembiljet op te vouwen en hem in de stembus te steken. Als je elektronisch stemt, zal je een code moeten scannen om jouw stem effectief te registreren.", false);
 
                                 main.prtSel.stop();
                                 main.setB(list);
@@ -161,7 +161,7 @@ export default function sc030(engine) {
                                         ticketbox.actionManager = new BABYLON.ActionManager(scene);
                                         let ticketboxesAction = ticketbox.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
-                                            dialogPop("KLAAR", "Haal je papieren terug op", false);
+                                            dialogPop("Klaar met Stemmen", "Nadien krijg je jouw identiteitskaart en afgestempelde oproepingsbrief terug.", false);
 
                                             main.prtSel.stop();
                                             scene.getAnimationGroupByName("ANIM.Ticket.OUT").start(false);
