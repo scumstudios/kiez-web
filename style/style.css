@@ -213,11 +213,11 @@ a {
 
 #dialogTitle {
     grid-column: span 4;
-    padding: 0.15em 0.55em;
+    padding: 0.1em 0.35em;
     box-sizing: border-box;
     width: 100%;
     font-family: bobby, Arial, Helvetica, sans-serif;
-    font-size: 1.25em;
+    font-size: 1.15em;
     color: var(--black);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
@@ -226,18 +226,18 @@ a {
 
 #dialogText {
     grid-column: span 4;
-    padding: 0.75em;
+    padding: 0.6em;
     box-sizing: border-box;
     width: 100%;
     font-family: os-light, Arial, Helvetica, sans-serif;
-    font-size: 0.85em;
+    font-size: 0.8em;
     color: var(--white);
     border-style: solid;
     border-width: 0.15em;
     border-color: var(--pink);
     border-radius: 0px;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
     background-color: var(--pinktp);
 }
 

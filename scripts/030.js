@@ -142,6 +142,7 @@ export default function sc030(engine) {
                                 scene.getAnimationGroupByName("ANIM.List.OUT").start(false);
                                 scene.getAnimationGroupByName("ANIM.List.OUT").onAnimationEndObservable.add(() => {
                                     
+                                    camAnim(Math.PI/2, 1, 10, "TGT.Finish", 0.75);
                                     main.setW(ticketbox);
                                     scene.getAnimationGroupByName("ANIM.Ticketboxes.IN").start(false);
                                     scene.getAnimationGroupByName("ANIM.Ticketboxes.IN").onAnimationEndObservable.add(() => {
@@ -161,6 +162,7 @@ export default function sc030(engine) {
                                         ticketbox.actionManager = new BABYLON.ActionManager(scene);
                                         let ticketboxesAction = ticketbox.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
+                                            camAnim(Math.PI/2, 1, 9.5, "TGT.Zero", 0.75);
                                             dialogPop("Klaar met Stemmen", "Nadien krijg je jouw identiteitskaart en afgestempelde oproepingsbrief terug.", false);
 
                                             main.prtSel.stop();
