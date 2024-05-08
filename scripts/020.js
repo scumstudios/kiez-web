@@ -48,7 +48,7 @@ export default function sc020(engine) {
             camAnim(2, 0.6, 3.5, "TGT.Employment", 0.75);
             document.getElementById("dialogButton").style.display = 'none';
             main.setY(employment);
-            dialogPop("Werkgelegenheid", "Politici beslissen over maatregelen die de economie stimuleren zoals stages organiseren, kansen bieden voor jonge ondernemers en minimumlonen", false);
+            dialogPop("Werkgelegenheid", "Politici beslissen over maatregelen die de economie stimuleren zoals stages organiseren, kansen bieden voor jonge ondernemers en minimumlonen.", false);
         });
 
         employment.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
@@ -124,7 +124,7 @@ export default function sc020(engine) {
         const environmentAnimation = scene.getAnimationGroupByName("ANIM.Environment");
         environmentAnimation.onAnimationEndObservable.add(() => {
             camAnim(2, 0.6, 3.5, "TGT.Environment", 0.75);
-            dialogPop("Ecologie & Omgeving", "De politiek beslist ook over dingen die te maken hebben met milieu. Zo worden er op Europees niveau bijvoorbeeld beslissingen gemaakt over de opwarming van de aarde en op Vlaams niveau over dingen zoals afvalverwerking, plaatsen van windmolens, subsidies voor elektrische auto's, zonnepanelen,...", false);
+            dialogPop("Ecologie & Omgeving", "De politiek beslist ook over dingen die te maken hebben met milieu. Zo worden er op Europees niveau bijvoorbeeld beslissingen gemaakt over de opwarming van de aarde en op Vlaams niveau over zaken zoals afvalverwerking, plaatsen van windmolens, subsidies voor elektrische auto's, zonnepanelen,...", false);
             main.setY(environment);
         });
 

@@ -7,7 +7,7 @@ export default function sc040(engine) {
     let sg = main.sg;
     let vcolmat = main.vcolmat;
 
-    dialogPop("Kieskringen", "In 2024, zijn er 2 dagen dat we verwacht worden in het stemhokje. Op 9 juni en 13 oktober, maar op wat ga je dan stemmen?", false);
+    dialogPop("Kieskringen", "In 2024 zijn er 2 dagen waarop we verwacht worden in het stemhokje, namelijk 9 juni en 13 oktober. Maar op wat ga je dan stemmen?", false);
 
     // Import GLB
     BABYLON.SceneLoader.LoadAssetContainer("../assets/", "040-election_types.glb", scene, function(container) {
@@ -35,7 +35,7 @@ export default function sc040(engine) {
         europe.actionManager = new BABYLON.ActionManager(scene);
         europe.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
             camAnim(6.282, 0.65, 8, "TGT.Europe", 0.75);
-            dialogPop("Europees Parlement", "Op 9 juni stem je voor het Europees parlement. Hier wordt er beslist rond zaken als wetgeving, internationale overeenkomsten, controle en toezicht, etc. Hier mag je ook gaan stemmen vanaf je 16de!", false);
+            dialogPop("Europees Parlement", "Op 9 juni stem je voor het Europees parlement. Hier worden er beslissingen gemaakt rond zaken als wetgeving, internationale overeenkomsten, controle en toezicht, etc. Hier mag je ook gaan stemmen vanaf 16 jarige leeftijd.", false);
             main.setY(europe);
             main.prtHighlight(europe, 50);
         }));
@@ -46,7 +46,7 @@ export default function sc040(engine) {
         federal.actionManager = new BABYLON.ActionManager(scene);
         federal.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
             camAnim(4.65, 0.65, 6, "TGT.Federal", 0.75);
-            dialogPop("Federaal Parlement & De Kamer", "Op 9 juni stem je ook voor het Federaal Parlement en De kamer. Hier wordt er beslist rond zaken als buitenlandse zaken, defensie, migratie en asiel, etc.", false);
+            dialogPop("Federaal Parlement & De Kamer", "Je stemt op 9 juni ook voor De Kamer, dat is een onderdeel van het Federaal Parlement. Hier worden beslissingen gemaakt rond zaken zoals buitenlandse zaken, defensie, migratie en asiel, etc.", false);
             main.setY(federal);
             main.prtHighlight(federal, 35, 0.011);
         }));
@@ -68,7 +68,7 @@ export default function sc040(engine) {
         local.actionManager = new BABYLON.ActionManager(scene);
         local.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
             camAnim(1.6, 0.65, 3, "TGT.Local", 0.75);
-            dialogPop("Provincie- en gemeenteraadsverkiezingen", "Op 13 oktober stem je voor je provincie en gemeenteraad. Hier wordt er beslist rond zaken als jeugd, evenementen in jouw gemeente, onderhoud en aanleg van parken, OCMW, mobiliteit, etc. Hier mag je ook gaan stemmen vanaf je 16de!", false);
+            dialogPop("Provincie- en gemeenteraadsverkiezingen", "Op 13 oktober stem je voor je provincie en gemeenteraad. Hier worden er beslissingen gemaakt rond zaken als jeugd, evenementen in jouw gemeente, onderhoud en aanleg van parken, OCMW, mobiliteit, etc. Hier mag je ook gaan stemmen vanaf je 16 jaar!", false);
             main.setY(local);
             main.prtHighlight(local, 25, 0.0035);
         }));

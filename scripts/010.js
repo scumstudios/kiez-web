@@ -21,7 +21,7 @@ export default function sc010(engine) {
         scene.stopAllAnimations();
 
         main.camAnim(Math.PI/2, 1, 7.5, "TGT.Start", 0.75);
-        dialogPop("Links & Rechts", "LINKS-RECHTS is een opdeling om het politieke landschap begrijpelijk te maken. Partijen zijn natuurlijk complexer dan dat; op basis van hun standpunten zijn ze meer links of rechts georiënteerd. Links staat voor progressiviteit, solidariteit en inclusie. Denk dan aan partijen zoals PVDA, Groen en Vooruit. En rechts staat voor conservatisme, individuele vrijheid en traditiegericht beleid. Dit zijn dan partijen zoals N-VA en Vlaams Belang. De partijen Open Vld en CD&V plaatsen we in het centrum, omdat zij tussen links en rechts zitten.", false);
+        dialogPop("Links & Rechts", "LINKS-RECHTS is een opdeling om het politieke landschap begrijpelijk te maken. Partijen zijn natuurlijk complexer dan dat; op basis van hun standpunten zijn ze meer links of rechts georiënteerd. Links staat voor progressiviteit, solidariteit en inclusie. Denk dan aan partijen zoals PVDA, Groen en Vooruit. En rechts staat voor conservatisme, individuele vrijheid en traditiegericht beleid. Dit zijn dan partijen zoals N-VA en Vlaams Belang. De partijen Open VLD en CD&V plaatsen we in het centrum, omdat zij tussen links en rechts zitten.", false);
 
         scene.getAnimationGroupByName("ANIM.Cloud.000").start(true);
         scene.getAnimationGroupByName("ANIM.Cloud.001").start(true);
@@ -119,7 +119,7 @@ export default function sc010(engine) {
         cdnv.actionManager = new BABYLON.ActionManager(scene);
         cdnv.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
                 camAnim(Math.PI/2, 0.65, 5, "TGT.CDNV", 0.5);
-                dialogPop("CD&V", "Christendemocratie: “We zijn een centrumpartij die probeert om niemand te vergeten. We hebben terug nood aan een samenleving die hecht wordt. Alle leerlingen verdienen dezelfde kansen, anticonceptie moet gratis worden en jongeren met psychische problemen moeten beter geholpen worden.”", false);
+                dialogPop("CD&V", "Christendemocratie: “We zijn een centrumpartij die probeert om niemand te vergeten. We hebben weer nood aan een samenleving die hecht wordt. Alle leerlingen verdienen dezelfde kansen, anticonceptie moet gratis worden en jongeren met psychische problemen moeten beter geholpen worden.”", false);
                 main.setB(cdnv);
                 main.prtHighlight(cdnv);
         }));

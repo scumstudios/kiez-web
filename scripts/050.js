@@ -41,7 +41,7 @@ export default function sc050(engine) {
         formation.actionManager = new BABYLON.ActionManager(scene);
         formation.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
                 camAnim(3.1, 1.25, 4.5, "TGT.Formation", 0.75);
-                dialogPop("Formatie", "De koning ontvangt de voorzitters van de Kamer en de Senaat, evenals voorzitters van belangrijke partijen en experts, en wijst daarna een informateur aan. De informateur zal met alle partijen en verkozenen gaan praten om te luisteren naar hoe zij de regeringsvorm zien en met wie zij willen samenwerken en welke coalities zij voor ogen hebben. Daarna stelt de koning een formateur aan, aie moet de daadwerkelijke regering vormen op basis van de partijprogramma's. Als die hierin slaagt, zal die de functie van premier bekleden. Ook zal die het nieuwe regeerakkoord opstellen.", false);
+                dialogPop("Formatie", "De koning ontvangt de voorzitters van de Kamer en de Senaat, evenals voorzitters van belangrijke partijen en experts, en wijst daarna een informateur aan. De informateur zal met alle partijen en verkozenen gaan praten om te luisteren naar hoe zij de regeringsvorm zien en met wie zij willen samenwerken en welke coalities zij voor ogen hebben. Daarna stelt de koning een formateur aan, die moet de daadwerkelijke regering vormen op basis van de partijprogramma's. Als die hierin slaagt, zal die de functie van premier bekleden. Ook zal die het nieuwe regeerakkoord opstellen.", false);
                 main.setY(formation);
                 main.prtHighlight(formation);
         }));
@@ -51,7 +51,7 @@ export default function sc050(engine) {
         government.actionManager = new BABYLON.ActionManager(scene);
         government.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
                 camAnim(4.9, 1.25, 4, "TGT.Government", 0.75);
-                dialogPop("Regering", "De formateur zal de nieuwe regering voorstellen aan de koning. Als hij die goedkeurt, moeten alle ministers de eed afleggen. De nieuwe regering zal een verklaring opstellen, die wordt verkondigd door de eerste minister in de Kamer. Als zij het vertrouwen krijgen, kan de regering aan de slag voor 5 jaar.", false);
+                dialogPop("Regering", "De formateur zal de nieuwe regering voorstellen aan de koning. Als hij die goedkeurt, moeten alle ministers de eed afleggen. De nieuwe regering zal een verklaring opstellen. Die wordt verkondigd door de eerste minister in de Kamer. Als zij het vertrouwen krijgen, kan de regering aan de slag voor 5 jaar.", false);
                 main.setY(government);
                 main.prtHighlight(government);
         }));
@@ -61,7 +61,7 @@ export default function sc050(engine) {
         versus.actionManager = new BABYLON.ActionManager(scene);
         versus.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function (pvda) {
                 camAnim(6.475, 1.25, 3.5, "TGT.Versus", 0.75);
-                dialogPop("Oppositie & Coalitie", "De partijen die in de regering terechtkomen behoren tot de coalitie; zij vormen samen een meerderheid. Omdat zij de meerderheid vormen, hebben zij de doorslag bij het nemen van beslissingen. De oppositie bestaat uit alle partijen die niet in de regering zijn opgenomen, dus zij vormen de minderheid. Hun taak is kritisch te zijn tegenover de coalitie.", false);
+                dialogPop("Oppositie & Coalitie", "De partijen die in de regering terechtkomen, behoren tot de coalitie. Zij vormen samen een meerderheid. Omdat zij de meerderheid vormen, geven zij de doorslag bij het nemen van beslissingen. De oppositie bestaat uit alle partijen die niet in de regering zijn opgenomen, dus zij vormen de minderheid. Hun taak is om kritisch te zijn tegenover de coalitie.", false);
                 main.setY(versus);
                 main.prtHighlight(versus);
         }));

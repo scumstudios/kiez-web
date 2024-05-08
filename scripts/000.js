@@ -116,7 +116,7 @@ export default function sc000(engine) {
         evt_howto.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
             main.camera.useAutoRotationBehavior = false;
             document.getElementById("logoContainer").style.display = 'none';
-            main.dialogPop("Stemmen, Praktisch", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
+            main.dialogPop("Gaan Stemmen", "Hoe ziet het stemproces er praktisch uit?", true, "../scn.html?s=030");
             main.camAnim(1.575, 1, 7.5, "TGT.Zero", 1);
             main.setB(evt_howto);
             main.prtHighlight(evt_howto);

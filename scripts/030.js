@@ -65,7 +65,7 @@ export default function sc030(engine) {
                     scene.getAnimationGroupByName("ANIM.ID.IN").start(false);
                     scene.getAnimationGroupByName("ANIM.ID.IN").onAnimationEndObservable.add(() => {
                         main.prtHighlight(id);
-                        dialogPop("Gaan Stemmen", "Neem zeker je identiteitskaart en je oproepingsbrief mee naar het stembureau en geef hem af aan een medewerker. Je ontvangt dan je stemkaart.", false);
+                        dialogPop("Gaan Stemmen", "Neem zeker je identiteitskaart en je oproepingsbrief mee naar het stembureau en geef ze af aan een medewerker. Je ontvangt dan je stemkaart.", false);
                 });    
                 
                 id.actionManager = new BABYLON.ActionManager(scene);
@@ -110,7 +110,7 @@ export default function sc030(engine) {
                         electronic.actionManager = new BABYLON.ActionManager(scene);
                         let electronicAction = electronic.actionManager.registerAction(new BABYLON.ExecuteCodeAction(BABYLON.ActionManager.OnPickTrigger, function () {
 
-                            dialogPop("De Kieslijst", "Dan krijg je een kieslijst, deze krijg je dan oftewel op het scherm voor je. Of je krijgt hem op papier. Hierop staan alle kandidaten van partijen waarop jij kan stemmen. ", false);
+                            dialogPop("De Kieslijst", "Dan krijg je een kieslijst, deze krijg je dan oftewel op het scherm voor je. Of je krijgt hem op papier. Hierop staan alle kandidaten van partijen waarop je kan stemmen. ", false);
 
                             main.prtSel.stop();
                             main.setB(electronic);
